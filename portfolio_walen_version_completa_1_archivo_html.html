@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio – Walen Calderon</title>
+  <meta name="description" content="Portfolio moderno, accesible y bilingüe (ES/EN) de Walen Calderon. Proyectos, skills, experiencia, educación y contacto." />
+  <meta name="theme-color" content="#0b0f14" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="Style.css" />
+  
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Principal">
+      <a class="brand" href="#home" aria-label="Ir al inicio">
+        <i class="logo" aria-hidden="true"></i> <span>Walen</span>
+      </a>
+      <input type="checkbox" id="menuToggle" aria-label="Abrir menú" aria-controls="mainmenu">
+      <label class="menu-btn" for="menuToggle" aria-hidden="true">☰</label>
+      <ul id="mainmenu" class="menu" role="menu">
+        <li class="menu-item lang">
+          <button class="lang-btn" id="langToggle" aria-expanded="false" aria-controls="langMenu">
+            <span aria-hidden="true">🌐</span> <span id="langLabel">ES</span> ▾
+          </button>
+          <ul class="lang-menu" id="langMenu" role="menu" hidden>
+            <li><button type="button" data-lang="es">Español</button></li>
+            <li><button type="button" data-lang="en">English</button></li>
+          </ul>
+        </li>
+        <li class="menu-item"><a class="active" href="#home" data-i18n="home">Inicio</a></li>
+        <li class="menu-item"><a href="#about" data-i18n="about">Sobre mí</a></li>
+        <li class="menu-item"><a href="#projects" data-i18n="projects">Proyectos</a></li>
+        <li class="menu-item"><a href="#skills" data-i18n="skills">Skills</a></li>
+        <li class="menu-item"><a href="#experience" data-i18n="experience">Experiencia</a></li>
+        <li class="menu-item"><a href="#education" data-i18n="education">Educación</a></li>
+        <li class="menu-item"><a href="#contact" data-i18n="contact">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="home" class="home container">
+    <section class="grid-hero">
+      <div>
+        <p class="kicker" data-i18n="kicker">Desarrollador en formación</p>
+        <h1><span data-i18n="greeting">Hola, soy</span> <span class="grad">Walen Calderon</span></h1>
+        <p class="lead" id="typeTarget" aria-live="polite"></p>
+        <div class="cta">
+          <a href="#projects" class="btn primary" data-i18n="viewWork">Ver proyectos</a>
+          <a href="#contact" class="btn" data-i18n="contactMe">Contactarme</a>
+          <a href="#" class="btn" id="downloadCV" data-i18n="downloadCV">Descargar CV</a>
+        </div>
+        <ul class="tags" aria-label="Tecnologías">
+          <li>Java</li><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Git</li>
+        </ul>
+      </div>
+      <aside>
+        <div class="hero-card">
+          <b data-i18n="quickProfile">Perfil rápido</b>
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li data-i18n="qp1">CS student (Java, Web)</li>
+            <li data-i18n="qp2">Disponible para pasantía</li>
+            <li data-i18n="qp3">Enfocado en accesibilidad</li>
+          </ul>
+          <div class="stats" aria-label="Métricas">
+            <div class="stat"><b>1.5+</b><div class="muted" data-i18n="yearsCoding">años de código</div></div>
+            <div class="stat"><b>8+</b><div class="muted" data-i18n="projectsDone">proyectos hechos</div></div>
+            <div class="stat"><b>100%</b><div class="muted" data-i18n="availability">disponibilidad</div></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- ======= About ======= -->
+    <section id="about">
+      <div class="section-head">
+        <h2 data-i18n="about">Sobre mí</h2>
+        <p class="muted" data-i18n="aboutHelp">Resumen, enfoque y valores.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <p data-i18n="aboutText">Soy estudiante de Computer Science con enfoque en Java y desarrollo web. Escribo código claro, accesible y mantenible.</p>
+          <ul class="tags" aria-label="Stack actual">
+            <li>Java</li><li>POO</li><li>HTML</li><li>CSS</li><li>JS</li><li>Git</li>
+          </ul>
+        </article>
+        <article class="card">
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li>✔️ <span data-i18n="a11y">Accesibilidad (A11y)</span></li>
+            <li>✔️ <span data-i18n="cleanCode">Código limpio y probado</span></li>
+            <li>✔️ <span data-i18n="teamwork">Trabajo en equipo y feedback</span></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======= Projects ======= -->
+    <section id="projects">
+      <div class="section-head">
+        <h2 data-i18n="projects">Proyectos</h2>
+        <p class="muted" data-i18n="projectsHelp">Algunos ejemplos de lo que he construido.</p>
+      </div>
+      <div class="filters" role="group" aria-label="Filtros de proyectos">
+        <button class="chip" data-filter="all" aria-pressed="true" data-i18n="all">Todos</button>
+        <button class="chip" data-filter="java">Java</button>
+        <button class="chip" data-filter="web">Web</button>
+        <button class="chip" data-filter="academic" data-i18n="academic">Académicos</button>
+      </div>
+      <div class="grid" id="projectGrid" style="margin-top:16px">
+        <!-- Project 1 -->
+        <article class="project card" data-tags="java academic">
+          <div class="pill">Java • CLI</div>
+          <div class="thumb" aria-hidden="true"></div>
+          <h3>Hockey Manager</h3>
+          <p data-i18n="proj1">App de consola para equipos y estadísticas (parsing, FileWriter, Scanner).</p>
+          <div class="cta"><a class="btn" href="#" aria-label="Ver código Hockey Manager">Código</a></div>
+        </article>
+        <!-- Project 2 -->
+        <article class="project card" data-tags="web">
+          <div class="pill">Web • HTML/CSS</div>
+          <div class="thumb" aria-hidden="true"></div>
+          <h3>Calculadora accesible</h3>
+          <p data-i18n="proj2">Calculadora accesible sin frameworks.</p>
+          <div class="cta"><a class="btn" href="#" aria-label="Ver demo Calculadora">Demo</a></div>
+        </article>
+        <!-- Project 3 -->
+        <article class="project card" data-tags="web">
+          <div class="pill">Web • JS</div>
+          <div class="thumb" aria-hidden="true"></div>
+          <h3>To‑Do</h3>
+          <p data-i18n="proj3">Lista de tareas con almacenamiento local.</p>
+          <div class="cta"><a class="btn" href="#" aria-label="Ver demo To‑Do">Demo</a></div>
+        </article>
+        <!-- Project 4 (extra) -->
+        <article class="project card" data-tags="java">
+          <div class="pill">Java • OOP</div>
+          <div class="thumb" aria-hidden="true"></div>
+          <h3>Gestor de tareas</h3>
+          <p data-i18n="proj4">Aplicación de consola para crear, editar y listar tareas (POO, archivos).</p>
+          <div class="cta"><a class="btn" href="#" aria-label="Ver código Gestor de tareas">Código</a></div>
+        </article>
+        <!-- Project 5 (extra) -->
+        <article class="project card" data-tags="web academic">
+          <div class="pill">Web • JS</div>
+          <div class="thumb" aria-hidden="true"></div>
+          <h3>Portfolio v1</h3>
+          <p data-i18n="proj5">Primer portfolio con i18n, partículas y formulario de contacto.</p>
+          <div class="cta"><a class="btn" href="#" aria-label="Ver demo Portfolio v1">Demo</a></div>
+        </article>
+        <!-- Project 6 (extra) -->
+        <article class="project card" data-tags="web">
+          <div class="pill">Web • API</div>
+          <div class="thumb" aria-hidden="true"></div>
+          <h3>Clima simple</h3>
+          <p data-i18n="proj6">Widget que consume una API de clima y muestra datos básicos.</p>
+          <div class="cta"><a class="btn" href="#" aria-label="Ver demo Clima">Demo</a></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======= Skills ======= -->
+    <section id="skills">
+      <div class="section-head">
+        <h2 data-i18n="skills">Skills</h2>
+        <p class="muted" data-i18n="skillsHelp">Niveles aproximados y herramientas de trabajo.</p>
+      </div>
+      <div class="skills-wrap">
+        <div class="card skill">
+          <b>Java</b>
+          <div class="bar" aria-label="Nivel Java"><i style="width:80%"></i></div>
+          <small class="muted" data-i18n="javaDesc">POO, colecciones, I/O, CLI</small>
+        </div>
+        <div class="card skill">
+          <b>HTML & CSS</b>
+          <div class="bar" aria-label="Nivel HTML/CSS"><i style="width:85%"></i></div>
+          <small class="muted">Flex, Grid, Responsive</small>
+        </div>
+        <div class="card skill">
+          <b>JavaScript</b>
+          <div class="bar" aria-label="Nivel JS"><i style="width:70%"></i></div>
+          <small class="muted">DOM, fetch, accesibilidad</small>
+        </div>
+        <div class="card skill">
+          <b>Herramientas</b>
+          <div class="bar" aria-label="Herramientas"><i style="width:75%"></i></div>
+          <small class="muted">Git, GitHub, VS Code / IntelliJ</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Experience ======= -->
+    <section id="experience">
+      <div class="section-head">
+        <h2 data-i18n="experience">Experiencia</h2>
+        <p class="muted" data-i18n="expHelp">Proyectos y roles relevantes.</p>
+      </div>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <b>Student Developer</b> · <span class="muted">2024 – 2025</span>
+            <p class="muted" data-i18n="exp1">Proyectos académicos en Java (CLI), apps web pequeñas y prácticas de Git.</p>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" aria-hidden="true"></div>
+          <div class="tl-card">
+            <b>Personal Projects</b> · <span class="muted">2023 – 2025</span>
+            <p class="muted" data-i18n="exp2">Calculadora accesible, lista de tareas con localStorage y portfolio bilingüe.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======= Education ======= -->
+    <section id="education">
+      <div class="section-head">
+        <h2 data-i18n="education">Educación</h2>
+        <p class="muted" data-i18n="eduHelp">Formación académica y cursos.</p>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <b>Middlesex College</b> · <span class="muted">A.S. Computer Science</span>
+          <p class="muted" data-i18n="edu1">Cursos de Java, estructura de datos, cálculo y fundamentos web.</p>
+        </article>
+        <article class="card">
+          <b>Certificados / Cursos</b>
+          <ul class="muted" style="margin:0;padding-left:18px">
+            <li data-i18n="cert1">Git y control de versiones</li>
+            <li data-i18n="cert2">Accesibilidad web</li>
+            <li data-i18n="cert3">Fundamentos de redes</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- ======= Testimonials (opcionales) ======= -->
+    <section id="testimonials">
+      <div class="section-head">
+        <h2 data-i18n="testimonials">Testimonios</h2>
+        <p class="muted" data-i18n="testiHelp">Qué dicen profesores o colegas.</p>
+      </div>
+      <div class="testimonials">
+        <blockquote>“Walen shows strong initiative and clean coding habits.” — <span class="muted">Professor</span></blockquote>
+        <blockquote>“Reliable teammate, learns fast and helps others.” — <span class="muted">Classmate</span></blockquote>
+        <blockquote>“Great attention to accessibility and UX details.” — <span class="muted">Mentor</span></blockquote>
+      </div>
+    </section>
+
+    <!-- ======= Contact ======= -->
+    <section id="contact">
+      <div class="section-head">
+        <h2 data-i18n="contact">Contacto</h2>
+        <p class="muted" data-i18n="contactHelp">¿Tienes una oportunidad o feedback? Escríbeme.</p>
+      </div>
+      <form id="contactForm" class="card" novalidate>
+        <label for="name" data-i18n="nameLabel">Nombre</label>
+        <input id="name" name="name" type="text" placeholder="Tu nombre" required />
+
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="tucorreo@email.com" required />
+
+        <label for="msg" data-i18n="msgLabel">Mensaje</label>
+        <textarea id="msg" name="msg" rows="5" placeholder="Cuéntame brevemente..." required></textarea>
+
+        <button class="btn primary" type="submit" data-i18n="send">Enviar</button>
+        <p id="formMsg" class="muted" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">© <span id="year"></span> • <span data-i18n="built">Hecho con HTML/CSS/JS</span></div>
+    <script src="scripts.js"></script>
+  </footer>
+</body>
+</html>
