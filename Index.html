@@ -1,126 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<title data-i18n="title">Portfolio Walen Calderon</title>
-
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">Portfolio Walen Calderon</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
-
 <body>
+  <div id="particles-js"></div>
 
-<nav>
+  <nav>
+    <div class="container nav-shell">
+      <a class="brand-text" href="#home">Walen Calderon</a>
 
-<div class="logo">
-Walen Calderon
-</div>
+      <input type="checkbox" id="click">
 
-<input type="checkbox" id="click">
-<label for="click" class="menu-btn">
-<i class="fas fa-bars"></i>
-</label>
+      <label for="click" class="menu-btn" aria-label="Open menu">
+        <i class="fas fa-bars"></i>
+      </label>
 
-<ul>
+      <ul>
+        <li class="lang-dropdown">
+          <button class="lang-btn" id="langToggle" type="button">
+            <span data-i18n="language">Language</span>
+            <i class="fas fa-caret-down"></i>
+          </button>
 
-<li class="lang-dropdown">
+          <ul class="lang-menu" id="langMenu">
+            <li><button class="lang-option" type="button" data-lang="es">Español</button></li>
+            <li><button class="lang-option" type="button" data-lang="en">English</button></li>
+          </ul>
+        </li>
 
-<button class="lang-btn" id="langToggle" type="button">
-<span data-i18n="language">Language</span>
-<i class="fas fa-caret-down"></i>
-</button>
+        <li><a class="active" href="#home" data-i18n="home">Home</a></li>
+        <li><a href="#about" data-i18n="about">About Me</a></li>
+        <li><a href="#projects" data-i18n="projects">Projects</a></li>
+        <li><a href="#skills" data-i18n="skills">Skills</a></li>
+        <li><a href="#contact" data-i18n="contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
 
-<ul class="lang-menu" id="langMenu">
+  <main>
+    <section id="home" class="home">
+      <div class="container hero-layout">
+        <div class="hero-copy card hero-panel">
+          <p class="eyebrow" data-i18n="subtitle">Using only HTML, CSS and JavaScript</p>
 
-<li>
-<button class="lang-option" data-lang="es">Español</button>
-</li>
+          <h1>
+            <span id="typing"></span>
+            <span class="cursor">|</span>
+          </h1>
 
-<li>
-<button class="lang-option" data-lang="en">English</button>
-</li>
+          <p class="hero-description" data-i18n="description">
+            Hi, I'm Walen Calderon, a passionate web developer. This portfolio showcases my skills and projects. Feel free to explore and connect with me!
+          </p>
 
-</ul>
+          <div class="hero-actions">
+            <a class="cta-button primary" href="#projects" data-i18n="ctaProjects">See projects</a>
+            <a class="cta-button secondary" href="#contact" data-i18n="ctaContact">Contact me</a>
+          </div>
+        </div>
 
-</li>
+        <aside class="card hero-panel hero-side">
+          <span class="pill" data-i18n="status">Open to opportunities</span>
 
-<li><a class="active" href="#home" data-i18n="home">Home</a></li>
-<li><a href="#about" data-i18n="about">About Me</a></li>
-<li><a href="#projects" data-i18n="projects">Projects</a></li>
-<li><a href="#skills" data-i18n="skills">Skills</a></li>
-<li><a href="#contact" data-i18n="contact">Contact</a></li>
+          <div class="stat-list">
+            <div class="stat-item">
+              <strong>3+</strong>
+              <span data-i18n="statProjects">Portfolio projects in progress</span>
+            </div>
 
-</ul>
+            <div class="stat-item">
+              <strong>HTML</strong>
+              <span data-i18n="statFrontend">Frontend foundations</span>
+            </div>
 
-</nav>
+            <div class="stat-item">
+              <strong>JS</strong>
+              <span data-i18n="statInteractive">Interactive experiences</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
+    <section id="about" class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="about">About Me</h2>
+          <p data-i18n="aboutTag">Learning by building real projects and polishing the details.</p>
+        </div>
 
-<section id="home" class="home">
+        <div class="cards two-columns">
+          <article class="card">
+            <h3 data-i18n="aboutJourneyTitle">My journey</h3>
+            <p data-i18n="aboutJourneyText">
+              I'm a Computer Science student focused on growing as a web developer. I enjoy turning ideas into clean, interactive experiences and improving a little with every project.
+            </p>
+          </article>
 
-<h1>
-<span id="typing"></span>
-<span class="cursor">|</span>
-</h1>
+          <article class="card">
+            <h3 data-i18n="aboutGoalTitle">What I care about</h3>
+            <p data-i18n="aboutGoalText">
+              I like interfaces that feel alive, readable code, and projects that show both creativity and progress. This portfolio is part of that process.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<p data-i18n="description">
-Hi, I'm Walen Calderon, a passionate web developer. This portfolio showcases my skills and projects. Feel free to explore and connect with me!
-</p>
+    <section id="projects" class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="projects">Projects</h2>
+          <p data-i18n="projectsTag">A few things I'm building and refining right now.</p>
+        </div>
 
-<button class="cta-button">Saber más</button>
+        <div class="cards project-grid">
+          <article class="card project-card">
+            <span class="pill">HTML / CSS / JS</span>
+            <h3 data-i18n="projectOneTitle">This portfolio</h3>
+            <p data-i18n="projectOneText">
+              A personal site focused on animation, responsive layout, and a cleaner visual identity while I keep learning frontend fundamentals.
+            </p>
+          </article>
 
-</section>
+          <article class="card project-card">
+            <span class="pill">UI Practice</span>
+            <h3 data-i18n="projectTwoTitle">Landing page experiments</h3>
+            <p data-i18n="projectTwoText">
+              Small interface exercises where I test layout ideas, color combinations, hover states, and better content structure.
+            </p>
+          </article>
 
+          <article class="card project-card">
+            <span class="pill">Learning</span>
+            <h3 data-i18n="projectThreeTitle">Frontend study workflow</h3>
+            <p data-i18n="projectThreeText">
+              A growing collection of mini builds that help me practice JavaScript interactions, accessibility basics, and responsive behavior.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-<section id="about" class="about"></section>
+    <section id="skills" class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="skills">Skills</h2>
+          <p data-i18n="skillsTag">Tools and areas I'm actively improving.</p>
+        </div>
 
+        <div class="cards two-columns">
+          <article class="card skill-card">
+            <h3>Frontend</h3>
+            <div class="skill-row">
+              <span>HTML</span>
+              <div class="bar"><i style="width: 88%"></i></div>
+            </div>
+            <div class="skill-row">
+              <span>CSS</span>
+              <div class="bar"><i style="width: 72%"></i></div>
+            </div>
+            <div class="skill-row">
+              <span>JavaScript</span>
+              <div class="bar"><i style="width: 68%"></i></div>
+            </div>
+          </article>
 
-<script src="scripts.js"></script>
+          <article class="card skill-card">
+            <h3 data-i18n="skillSoftTitle">Strengths</h3>
+            <div class="tag-list">
+              <span class="tag-chip" data-i18n="skillOne">Problem solving</span>
+              <span class="tag-chip" data-i18n="skillTwo">UI curiosity</span>
+              <span class="tag-chip" data-i18n="skillThree">Continuous learning</span>
+              <span class="tag-chip" data-i18n="skillFour">Git workflow</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
 
+    <section id="contact" class="section-block">
+      <div class="container">
+        <div class="section-head">
+          <h2 data-i18n="contact">Contact</h2>
+          <p data-i18n="contactTag">If you want, this section can later connect to email or social links.</p>
+        </div>
 
-<!-- particles background -->
+        <div class="card contact-card">
+          <p data-i18n="contactText">
+            I'm still shaping this portfolio, but I'm open to feedback, collaboration, and new ideas while I keep improving as a developer.
+          </p>
 
-<div id="particles-js"></div>
+          <div class="hero-actions">
+            <a class="cta-button secondary" href="mailto:walen@example.com">walen@example.com</a>
+            <a class="cta-button secondary" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-
-<script>
-particlesJS("particles-js", {
-"particles": {
-"number": {
-"value": 50,
-"density": { "enable": true, "value_area": 800 }
-},
-"color": { "value": "#00bfff" },
-"shape": { "type": "circle" },
-"opacity": { "value": 0.5 },
-"size": { "value": 3, "random": true },
-"line_linked": {
-"enable": true,
-"distance": 150,
-"color": "#00bfff",
-"opacity": 0.4,
-"width": 1
-},
-"move": {
-"enable": true,
-"speed": 2
-}
-},
-"interactivity": {
-"events": {
-"onhover": { "enable": true, "mode": "grab" },
-"onclick": { "enable": true, "mode": "push" }
-},
-"modes": {
-"grab": { "distance": 140 },
-"push": { "particles_nb": 4 }
-}
-},
-"retina_detect": true
-});
-</script>
-
+  <script src="scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 50,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": { "value": "#00bfff" },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5 },
+        "size": {
+          "value": 3,
+          "random": true
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#00bfff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 2
+        }
+      },
+      "interactivity": {
+        "detect_on": "window",
+        "events": {
+          "onhover": { "enable": true, "mode": "grab" },
+          "onclick": { "enable": true, "mode": "push" }
+        },
+        "modes": {
+          "grab": { "distance": 140 },
+          "push": { "particles_nb": 4 }
+        }
+      },
+      "retina_detect": true
+    });
+  </script>
 </body>
 </html>
