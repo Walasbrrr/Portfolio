@@ -6,35 +6,38 @@ const translations = {
         projects: "Projects",
         skills: "Skills",
         contact: "Contact",
-        title: "Portfolio Walen Calderon",
-        subtitle: "Using only HTML, CSS and JavaScript",
-        description: "Hi, I'm Walen Calderon, a passionate web developer. This portfolio showcases my skills and projects. Feel free to explore and connect with me!",
+        title: "Portfolio Walen I Calderon",
+        subtitle: "Computer Science student seeking internships",
+        description: "I'm an enthusiastic student mainly focused on Java, but I stay curious about every area of programming. I'm looking for an opportunity to learn and work on what I truly love across both software and hardware.",
         ctaProjects: "See projects",
         ctaContact: "Contact me",
-        status: "Open to opportunities",
-        statProjects: "Portfolio projects in progress",
-        statFrontend: "Frontend foundations",
-        statInteractive: "Interactive experiences",
-        aboutTag: "Learning by building real projects and polishing the details.",
+        status: "Seeking internship opportunities",
+        statProjects: "Projects I am actively improving",
+        statFrontend: "Software and hardware curiosity",
+        statInteractive: "Learning through real practice",
+        aboutTag: "Learning by building, improving, and staying curious.",
         aboutJourneyTitle: "My journey",
-        aboutJourneyText: "I'm a Computer Science student focused on growing as a web developer. I enjoy turning ideas into clean, interactive experiences and improving a little with every project.",
+        aboutJourneyText: "I'm a Computer Science student growing through hands-on projects and continuous learning. Java is my strongest foundation right now, but I enjoy exploring different areas of programming and technology.",
         aboutGoalTitle: "What I care about",
-        aboutGoalText: "I like interfaces that feel alive, readable code, and projects that show both creativity and progress. This portfolio is part of that process.",
-        projectsTag: "A few things I'm building and refining right now.",
+        aboutGoalText: "I'm looking for an internship where I can keep learning, contribute with curiosity and discipline, and gain real experience in software or hardware-related work.",
+        projectsTag: "A few things I'm building and refining as part of my learning process.",
         projectOneTitle: "This portfolio",
-        projectOneText: "A personal site focused on animation, responsive layout, and a cleaner visual identity while I keep learning frontend fundamentals.",
+        projectOneText: "A personal site focused on responsive layout, animation, and clearer presentation while I keep improving my frontend fundamentals.",
         projectTwoTitle: "Landing page experiments",
-        projectTwoText: "Small interface exercises where I test layout ideas, color combinations, hover states, and better content structure.",
+        projectTwoText: "Small interface exercises where I test layout ideas, color combinations, hover states, and cleaner content structure.",
         projectThreeTitle: "Frontend study workflow",
         projectThreeText: "A growing collection of mini builds that help me practice JavaScript interactions, accessibility basics, and responsive behavior.",
-        skillsTag: "Tools and areas I'm actively improving.",
+        skillsTag: "Tools and technologies I currently work with.",
+        skillTechTitle: "Technical skills",
         skillSoftTitle: "Strengths",
         skillOne: "Problem solving",
-        skillTwo: "UI curiosity",
+        skillTwo: "Curiosity across tech",
+        skillFive: "Java foundation",
+        skillSix: "Software and hardware interest",
         skillThree: "Continuous learning",
         skillFour: "Git workflow",
-        contactTag: "If you want, this section can later connect to email or social links.",
-        contactText: "I'm still shaping this portfolio, but I'm open to feedback, collaboration, and new ideas while I keep improving as a developer."
+        contactTag: "You can reach me through email, GitHub, or LinkedIn.",
+        contactText: "I'm open to internship opportunities, feedback, and conversations about software, programming, or hardware-related work while I keep growing as a developer."
     },
     es: {
         home: "Inicio",
@@ -43,35 +46,38 @@ const translations = {
         projects: "Proyectos",
         skills: "Habilidades",
         contact: "Contacto",
-        title: "Portfolio Walen Calderon",
-        subtitle: "Usando solo HTML, CSS y JavaScript",
-        description: "Hola, soy Walen Calderon, un apasionado desarrollador web. Este portafolio muestra mis habilidades y proyectos. Si quieres, explora y conectemos.",
+        title: "Portfolio Walen I Calderon",
+        subtitle: "Estudiante de Ciencias de la Computación en busca de internships",
+        description: "Soy un estudiante entusiasta especializado principalmente en Java; sin embargo, tengo curiosidad por cada ámbito de la programación. Me gustaría tener una oportunidad para aprender y trabajar en lo que amo, tanto en software como en hardware.",
         ctaProjects: "Ver proyectos",
         ctaContact: "Contáctame",
-        status: "Disponible para oportunidades",
-        statProjects: "Proyectos del portfolio en progreso",
-        statFrontend: "Base de frontend",
-        statInteractive: "Experiencias interactivas",
-        aboutTag: "Aprendiendo al construir proyectos reales y pulir los detalles.",
+        status: "Buscando oportunidades de internship",
+        statProjects: "Proyectos que estoy mejorando activamente",
+        statFrontend: "Curiosidad por software y hardware",
+        statInteractive: "Aprendiendo con práctica real",
+        aboutTag: "Aprendiendo al construir, mejorar y mantener la curiosidad.",
         aboutJourneyTitle: "Mi camino",
-        aboutJourneyText: "Soy estudiante de Ciencias de la Computación y estoy creciendo como desarrollador web. Me gusta convertir ideas en experiencias limpias e interactivas y mejorar un poco con cada proyecto.",
+        aboutJourneyText: "Soy estudiante de Ciencias de la Computación y estoy creciendo a través de proyectos prácticos y aprendizaje continuo. Java es mi base más fuerte por ahora, pero disfruto explorar distintas áreas de la programación y la tecnología.",
         aboutGoalTitle: "Lo que me importa",
-        aboutGoalText: "Me gustan las interfaces con vida, el código legible y los proyectos que muestran creatividad y progreso. Este portfolio forma parte de ese proceso.",
-        projectsTag: "Algunas cosas que estoy construyendo y mejorando ahora mismo.",
+        aboutGoalText: "Estoy buscando una internship donde pueda seguir aprendiendo, aportar con curiosidad y disciplina, y ganar experiencia real en trabajos relacionados con software o hardware.",
+        projectsTag: "Algunas cosas que estoy construyendo y mejorando como parte de mi proceso de aprendizaje.",
         projectOneTitle: "Este portfolio",
-        projectOneText: "Un sitio personal enfocado en animación, diseño responsive y una identidad visual más clara mientras sigo aprendiendo frontend.",
+        projectOneText: "Un sitio personal enfocado en diseño responsive, animación y una presentación más clara mientras sigo mejorando mis bases de frontend.",
         projectTwoTitle: "Experimentos de landing page",
         projectTwoText: "Pequeños ejercicios de interfaz donde pruebo ideas de layout, combinaciones de color, estados hover y mejor estructura de contenido.",
         projectThreeTitle: "Rutina de estudio frontend",
         projectThreeText: "Una colección creciente de mini proyectos que me ayudan a practicar interacciones con JavaScript, accesibilidad básica y comportamiento responsive.",
-        skillsTag: "Herramientas y áreas que estoy mejorando activamente.",
+        skillsTag: "Herramientas y tecnologías con las que trabajo actualmente.",
+        skillTechTitle: "Habilidades técnicas",
         skillSoftTitle: "Fortalezas",
         skillOne: "Resolución de problemas",
-        skillTwo: "Curiosidad por UI",
+        skillTwo: "Curiosidad por la tecnología",
+        skillFive: "Base en Java",
+        skillSix: "Interés en software y hardware",
         skillThree: "Aprendizaje continuo",
         skillFour: "Flujo con Git",
-        contactTag: "Si quieres, esta sección luego puede conectarse con email o redes.",
-        contactText: "Todavía estoy puliendo este portfolio, pero estoy abierto a feedback, colaboración y nuevas ideas mientras sigo mejorando como desarrollador."
+        contactTag: "Puedes contactarme por email, GitHub o LinkedIn.",
+        contactText: "Estoy abierto a oportunidades de internship, feedback y conversaciones sobre software, programación o trabajos relacionados con hardware mientras sigo creciendo como desarrollador."
     }
 };
 
@@ -95,8 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const phrases = [
         "Welcome to my Portfolio!",
         "¡Bienvenido a mi Portafolio!",
-        "I'm Walen Calderon, Computer Science Student",
-        "Soy Walen Calderon, Estudiante de Ciencias de la Computación"
+        "I'm Walen I Calderon, Computer Science Student",
+        "Soy Walen I Calderon, Estudiante de Ciencias de la Computación"
     ];
 
     let currentPhraseIndex = 0;
@@ -134,30 +140,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
     typeEffect();
 
-    const langToggle = document.getElementById("langToggle");
+    /** @type {HTMLButtonElement | null} */
+    const langToggle = /** @type {HTMLButtonElement | null} */ (document.getElementById("langToggle"));
     const langDropdown = document.querySelector(".lang-dropdown");
     const langOptions = document.querySelectorAll(".lang-option");
-    const menuCheckbox = document.getElementById("click");
+    /** @type {HTMLInputElement | null} */
+    const menuCheckbox = /** @type {HTMLInputElement | null} */ (document.getElementById("click"));
     const navLinks = document.querySelectorAll("nav a");
+
+    function setLangMenuExpanded(isExpanded) {
+        if (langToggle) {
+            langToggle.setAttribute("aria-expanded", String(isExpanded));
+        }
+    }
 
     if (langToggle && langDropdown) {
         langToggle.addEventListener("click", (event) => {
             event.stopPropagation();
+            const willOpen = !langDropdown.classList.contains("open");
             langDropdown.classList.toggle("open");
+            setLangMenuExpanded(willOpen);
         });
 
         document.addEventListener("click", (event) => {
-            if (!langDropdown.contains(event.target)) {
+            if (event.target instanceof Node && !langDropdown.contains(event.target)) {
                 langDropdown.classList.remove("open");
+                setLangMenuExpanded(false);
             }
         });
     }
 
     langOptions.forEach((option) => {
+        if (!(option instanceof HTMLButtonElement)) {
+            return;
+        }
+
         option.addEventListener("click", () => {
             const selectedLang = option.dataset.lang;
             if (selectedLang) {
                 setLang(selectedLang);
+                setLangMenuExpanded(false);
             }
         });
     });

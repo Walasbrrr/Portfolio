@@ -125,6 +125,13 @@ nav a.active,
   background: rgba(255, 255, 255, 0.05);
 }
 
+a:focus-visible,
+button:focus-visible,
+label:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
 #click {
   display: none;
 }

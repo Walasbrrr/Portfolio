@@ -3,7 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title data-i18n="title">Portfolio Walen Calderon</title>
+  <meta
+    name="description"
+    content="Portfolio of Walen I Calderon, Computer Science student seeking internship opportunities in software and hardware."
+  >
+  <title data-i18n="title">Walen Calderon | Software Developer Portfolio</title>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -12,19 +16,19 @@
 
   <nav>
     <div class="container nav-shell">
-      <a class="brand-text" href="#home">Walen Calderon</a>
+      <a class="brand-text" href="#home">Walen I Calderon</a>
 
       <input type="checkbox" id="click">
 
       <label for="click" class="menu-btn" aria-label="Open menu">
-        <i class="fas fa-bars"></i>
+        <i class="fas fa-bars" aria-hidden="true"></i>
       </label>
 
-      <ul>
+      <ul id="primary-navigation">
         <li class="lang-dropdown">
-          <button class="lang-btn" id="langToggle" type="button">
+          <button class="lang-btn" id="langToggle" type="button" aria-expanded="false" aria-controls="langMenu">
             <span data-i18n="language">Language</span>
-            <i class="fas fa-caret-down"></i>
+            <i class="fas fa-caret-down" aria-hidden="true"></i>
           </button>
 
           <ul class="lang-menu" id="langMenu">
@@ -46,7 +50,7 @@
     <section id="home" class="home">
       <div class="container hero-layout">
         <div class="hero-copy card hero-panel">
-          <p class="eyebrow" data-i18n="subtitle">Using only HTML, CSS and JavaScript</p>
+          <p class="eyebrow" data-i18n="subtitle">Computer Science student seeking internships</p>
 
           <h1>
             <span id="typing"></span>
@@ -54,7 +58,7 @@
           </h1>
 
           <p class="hero-description" data-i18n="description">
-            Hi, I'm Walen Calderon, a passionate web developer. This portfolio showcases my skills and projects. Feel free to explore and connect with me!
+            I'm an enthusiastic student mainly focused on Java, but I stay curious about every area of programming. I'm looking for an opportunity to learn and work on what I truly love across both software and hardware.
           </p>
 
           <div class="hero-actions">
@@ -64,22 +68,22 @@
         </div>
 
         <aside class="card hero-panel hero-side">
-          <span class="pill" data-i18n="status">Open to opportunities</span>
+          <span class="pill" data-i18n="status">Seeking internship opportunities</span>
 
           <div class="stat-list">
             <div class="stat-item">
               <strong>3+</strong>
-              <span data-i18n="statProjects">Portfolio projects in progress</span>
+              <span data-i18n="statProjects">Projects I am actively improving</span>
             </div>
 
             <div class="stat-item">
               <strong>HTML</strong>
-              <span data-i18n="statFrontend">Frontend foundations</span>
+              <span data-i18n="statFrontend">Software and hardware curiosity</span>
             </div>
 
             <div class="stat-item">
               <strong>JS</strong>
-              <span data-i18n="statInteractive">Interactive experiences</span>
+              <span data-i18n="statInteractive">Learning through real practice</span>
             </div>
           </div>
         </aside>
@@ -150,12 +154,16 @@
       <div class="container">
         <div class="section-head">
           <h2 data-i18n="skills">Skills</h2>
-          <p data-i18n="skillsTag">Tools and areas I'm actively improving.</p>
+          <p data-i18n="skillsTag">Tools and technologies I currently work with.</p>
         </div>
 
         <div class="cards two-columns">
           <article class="card skill-card">
-            <h3>Frontend</h3>
+            <h3 data-i18n="skillTechTitle">Technical skills</h3>
+            <div class="skill-row">
+              <span>Java</span>
+              <div class="bar"><i style="width: 84%"></i></div>
+            </div>
             <div class="skill-row">
               <span>HTML</span>
               <div class="bar"><i style="width: 88%"></i></div>
@@ -168,13 +176,19 @@
               <span>JavaScript</span>
               <div class="bar"><i style="width: 68%"></i></div>
             </div>
+            <div class="skill-row">
+              <span>Git</span>
+              <div class="bar"><i style="width: 70%"></i></div>
+            </div>
           </article>
 
           <article class="card skill-card">
             <h3 data-i18n="skillSoftTitle">Strengths</h3>
             <div class="tag-list">
               <span class="tag-chip" data-i18n="skillOne">Problem solving</span>
-              <span class="tag-chip" data-i18n="skillTwo">UI curiosity</span>
+              <span class="tag-chip" data-i18n="skillTwo">Curiosity across tech</span>
+              <span class="tag-chip" data-i18n="skillFive">Java foundation</span>
+              <span class="tag-chip" data-i18n="skillSix">Software and hardware interest</span>
               <span class="tag-chip" data-i18n="skillThree">Continuous learning</span>
               <span class="tag-chip" data-i18n="skillFour">Git workflow</span>
             </div>
@@ -187,17 +201,18 @@
       <div class="container">
         <div class="section-head">
           <h2 data-i18n="contact">Contact</h2>
-          <p data-i18n="contactTag">If you want, this section can later connect to email or social links.</p>
+          <p data-i18n="contactTag">You can reach me through email, GitHub, or LinkedIn.</p>
         </div>
 
         <div class="card contact-card">
           <p data-i18n="contactText">
-            I'm still shaping this portfolio, but I'm open to feedback, collaboration, and new ideas while I keep improving as a developer.
+            I'm open to internship opportunities, feedback, and conversations about software, programming, or hardware-related work while I keep growing as a developer.
           </p>
 
           <div class="hero-actions">
-            <a class="cta-button secondary" href="mailto:walen@example.com">walen@example.com</a>
-            <a class="cta-button secondary" href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="cta-button secondary" href="mailto:walenculd@gmail.com">walenculd@gmail.com</a>
+            <a class="cta-button secondary" href="https://github.com/Walasbrrr" target="_blank" rel="noreferrer">GitHub</a>
+            <a class="cta-button secondary" href="https://www.linkedin.com/in/walen-calderon-a017b42a4/" target="_blank" rel="noreferrer">LinkedIn</a>
           </div>
         </div>
       </div>
