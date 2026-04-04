@@ -81,6 +81,54 @@ const translations = {
     }
 };
 
+const particles = /** @type {any} */ (window).particlesJS;
+if (typeof particles === "function" && document.getElementById("particles-js")) {
+    particles("particles-js", {
+        "particles": {  
+            "number": {
+            "value": 50,
+            "density": {
+                "enable": true,
+                "value_area": 800
+            }
+            },
+            "color": { "value": "#00bfff" },
+            "shape": { "type": "circle" },
+            "opacity": { "value": 0.5 },
+            "size": {
+            "value": 3,
+            "random": true
+            },
+            "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#00bfff",
+            "opacity": 0.4,
+            "width": 1
+            },
+            "move": {
+            "enable": true,
+            "speed": 2
+            }
+        },
+        "interactivity": {
+            "detect_on": "window",
+            "events": {
+            "onhover": { "enable": true, "mode": "grab" },
+            "onclick": { "enable": true, "mode": "push" }
+            },
+            "modes": {
+            "grab": { "distance": 140 },
+            "push": { "particles_nb": 4 }
+            }
+        },
+        "retina_detect": true
+        }); 
+    }
+
+/** @typedef {"en" | "es"} Lang */
+
+/** @param {Lang} lang */
 function setLang(lang) {
     localStorage.setItem("lang", lang);
     document.documentElement.lang = lang;
@@ -96,7 +144,9 @@ function setLang(lang) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    const savedLang = localStorage.getItem("lang") || "en";
+    const rawSavedLang = localStorage.getItem("lang");
+    /** @type {Lang} */
+    const savedLang = rawSavedLang === "en" ? "es": "en"; 
     const typingElement = document.getElementById("typing");
     const phrases = [
         "Welcome to my Portfolio!",
@@ -148,6 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuCheckbox = /** @type {HTMLInputElement | null} */ (document.getElementById("click"));
     const navLinks = document.querySelectorAll("nav a");
 
+    /** @param {boolean} isExpanded */
     function setLangMenuExpanded(isExpanded) {
         if (langToggle) {
             langToggle.setAttribute("aria-expanded", String(isExpanded));
@@ -176,7 +227,8 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         option.addEventListener("click", () => {
-            const selectedLang = option.dataset.lang;
+            /** @type {Lang} */
+            const selectedLang = option.dataset.lang === "es" ? "es" : "en";
             if (selectedLang) {
                 setLang(selectedLang);
                 setLangMenuExpanded(false);
@@ -192,3 +244,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
