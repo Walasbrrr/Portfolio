@@ -4,12 +4,12 @@ import tseslint from "typescript-eslint";
 
 export default [
   {
-    ignores: ["node_modules/**"],
+    ignores: [".astro/**", "dist/**", "node_modules/**"],
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   {
-    files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
+    files: ["**/*.{js,mjs,cjs,ts,mts,cts,tsx}"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "script",

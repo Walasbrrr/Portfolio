@@ -2,13 +2,23 @@
   "compilerOptions": {
     "target": "ES2022",
     "module": "ESNext",
-    "lib": ["ES2022", "DOM"],
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
     "moduleResolution": "Bundler",
     "allowJs": true,
     "checkJs": true,
     "strict": false,
     "noEmit": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "allowImportingTsExtensions": true
   },
-  "include": ["public/scripts.js", "src/**/*.ts"]
+  "include": [
+    "public/scripts.js",
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ]
 }

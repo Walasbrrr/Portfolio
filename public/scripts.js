@@ -78,53 +78,54 @@ const translations = {
         skillFour: "Flujo con Git",
         contactTag: "Puedes contactarme por email, GitHub o LinkedIn.",
         contactText: "Estoy abierto a oportunidades de internship, feedback y conversaciones sobre software, programación o trabajos relacionados con hardware mientras sigo creciendo como desarrollador."
+
     }
 };
 
 const particles = /** @type {any} */ (window).particlesJS;
 if (typeof particles === "function" && document.getElementById("particles-js")) {
     particles("particles-js", {
-        "particles": {  
+        "particles": {
             "number": {
-            "value": 50,
-            "density": {
-                "enable": true,
-                "value_area": 800
-            }
+                "value": 50,
+                "density": {
+                    "enable": true,
+                    "value_area": 800
+                }
             },
             "color": { "value": "#00bfff" },
             "shape": { "type": "circle" },
             "opacity": { "value": 0.5 },
             "size": {
-            "value": 3,
-            "random": true
+                "value": 3,
+                "random": true
             },
             "line_linked": {
-            "enable": true,
-            "distance": 150,
-            "color": "#00bfff",
-            "opacity": 0.4,
-            "width": 1
+                "enable": true,
+                "distance": 150,
+                "color": "#00bfff",
+                "opacity": 0.4,
+                "width": 1
             },
             "move": {
-            "enable": true,
-            "speed": 2
+                "enable": true,
+                "speed": 2
             }
         },
         "interactivity": {
             "detect_on": "window",
             "events": {
-            "onhover": { "enable": true, "mode": "grab" },
-            "onclick": { "enable": true, "mode": "push" }
+                "onhover": { "enable": true, "mode": "grab" },
+                "onclick": { "enable": true, "mode": "push" }
             },
             "modes": {
-            "grab": { "distance": 140 },
-            "push": { "particles_nb": 4 }
+                "grab": { "distance": 140 },
+                "push": { "particles_nb": 4 }
             }
         },
         "retina_detect": true
-        }); 
-    }
+    });
+}
 
 /** @typedef {"en" | "es"} Lang */
 
@@ -146,7 +147,7 @@ function setLang(lang) {
 document.addEventListener("DOMContentLoaded", () => {
     const rawSavedLang = localStorage.getItem("lang");
     /** @type {Lang} */
-    const savedLang = rawSavedLang === "en" ? "es": "en"; 
+    const savedLang = rawSavedLang === "es" ? "es" : "en";
     const typingElement = document.getElementById("typing");
     const phrases = [
         "Welcome to my Portfolio!",
@@ -243,5 +244,56 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         });
     });
-});
 
+    const sections = Array.from(document.querySelectorAll("main section[id]"));
+    const navSectionLinks = Array.from(document.querySelectorAll('nav a.nav-link[href^="#"]'));
+
+    /**
+     * @param {string} activeId
+     */
+    function setActiveNav(activeId) {
+        navSectionLinks.forEach((link) => {
+            const isMatch = link.getAttribute("href") === `#${activeId}`;
+            link.classList.toggle("active", isMatch);
+            if (isMatch) {
+                link.setAttribute("aria-current", "page");
+            } else {
+                link.removeAttribute("aria-current");
+            }
+        });
+    }
+
+    /**
+     * Picks the section that currently owns the main reading area.
+     * This is more stable than raw intersection ratios near the page end.
+     */
+    function getCurrentSectionId() {
+        if (!sections.length) return "home";
+
+        const navOffset = 96;
+        const probeY = navOffset + window.innerHeight * 0.33;
+        let currentId = sections[0].id;
+
+        sections.forEach((section) => {
+            const rect = section.getBoundingClientRect();
+            if (rect.top <= probeY && rect.bottom > probeY) {
+                currentId = section.id;
+            }
+        });
+
+        const nearBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+        if (nearBottom) {
+            currentId = sections[sections.length - 1].id;
+        }
+
+        return currentId;
+    }
+
+    function updateActiveNav() {
+        setActiveNav(getCurrentSectionId());
+    }
+
+    window.addEventListener("scroll", updateActiveNav, { passive: true });
+    window.addEventListener("resize", updateActiveNav);
+    updateActiveNav();
+});
