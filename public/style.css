@@ -1,4 +1,4 @@
-:root {
+S:root {
   --bg: #050C16;
   --bg-soft: #0B1628;
   --surface: #11233C;
@@ -64,8 +64,13 @@ body::after {
 }
 
 @keyframes drift {
-  0% { transform: translate3d(-2.5%, -2%, 0) scale(1); }
-  100% { transform: translate3d(2.5%, 2%, 0) scale(1.05); }
+  0% {
+    transform: translate3d(-2.5%, -2%, 0) scale(1);
+  }
+
+  100% {
+    transform: translate3d(2.5%, 2%, 0) scale(1.05);
+  }
 }
 
 
@@ -257,7 +262,9 @@ main {
   font-size: 0.78rem;
 }
 
-h1, h2, h3,
+h1,
+h2,
+h3,
 p {
   margin-top: 0;
 }
@@ -278,7 +285,9 @@ h1 {
   min-height: 1.2em;
 }
 
-h1, h2, h3,
+h1,
+h2,
+h3,
 .brand-text,
 nav a,
 .lang-btn,
@@ -487,6 +496,7 @@ nav a,
 
 /* Responsive */
 @media (max-width: 900px) {
+
   .hero-layout,
   .cards.two-columns,
   .project-grid {
@@ -519,7 +529,7 @@ nav a,
     box-shadow: var(--shadow);
   }
 
-  #click:checked ~ ul {
+  #click:checked~ul {
     display: flex;
   }
 

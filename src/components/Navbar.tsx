@@ -90,7 +90,6 @@ export default function Navbar() {
                             {t("contact")}
                         </a>
                     </li>
-                    <li><a href="#" onClick={closeMenu}><button className="cta-button primary">{t("ctaProjects")}</button></a></li>
 
                 </ul>
             </div>

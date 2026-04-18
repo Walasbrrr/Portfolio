@@ -17,7 +17,7 @@ export default function Hero() {
     useEffect(() => {
         const phrases = [t("typingOne"), t("typingTwo")];
 
-        let timeoutId;
+        let timeoutId: ReturnType<typeof setTimeout>;
         if (isDeleting) {
             timeoutId = setTimeout(() => {
                 setText(text.slice(0, -1));
