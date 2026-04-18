@@ -16,6 +16,7 @@ export default function LanguageDropdown() {
 
     // Función que se llama al pulsar sobre un idioma
     const handleSelect = (newLang: 'en' | 'es') => {
+
         setLang(newLang); // ¡Cambia el contexto general!
         setIsOpen(false); // Cierra el menú al elegir
     };
@@ -40,7 +41,7 @@ export default function LanguageDropdown() {
                 <li>
                     <button
                         onClick={() => handleSelect('es')}
-                        className="lang-option"
+                        className={`lang-option ${lang === 'es' ? 'active' : ''}`}
                         type="button"
                     >
                         Español
@@ -49,7 +50,7 @@ export default function LanguageDropdown() {
                 <li>
                     <button
                         onClick={() => handleSelect('en')}
-                        className="lang-option"
+                        className={`lang-option ${lang === 'en' ? 'active' : ''}`}
                         type="button"
                     >
                         English

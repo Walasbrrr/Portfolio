@@ -17,7 +17,6 @@
     "allowImportingTsExtensions": true
   },
   "include": [
-    "public/scripts.js",
     "src/**/*.ts",
     "src/**/*.tsx"
   ]
