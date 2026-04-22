@@ -24,37 +24,41 @@ export default function ProjectSection() {
                     <p>{t("projectsTag")}</p>
                 </div>
 
-                <div className="filters">
+                <div className="filters" style={{ display: "flex", gap: "8px", flexWrap: "wrap", marginBottom: "1.5rem" }}>
                     <button 
                         className={`tag-chip ${filter === "all" ? "active" : ""}`} 
                         onClick={() => setFilter("all")}
                         aria-pressed={filter === "all"}
+                        style={{ cursor: "pointer", background: filter === "all" ? "rgba(255,255,255,0.1)" : "", color: filter === "all" ? "var(--text)" : "" }}
                     >{t("all")}</button>
                     <button 
                         className={`tag-chip ${filter === "java" ? "active" : ""}`} 
                         onClick={() => setFilter("java")}
                         aria-pressed={filter === "java"}
+                        style={{ cursor: "pointer", background: filter === "java" ? "rgba(255,255,255,0.1)" : "", color: filter === "java" ? "var(--text)" : "" }}
                     >Java</button>
                     <button 
                         className={`tag-chip ${filter === "web" ? "active" : ""}`} 
                         onClick={() => setFilter("web")}
                         aria-pressed={filter === "web"}
+                        style={{ cursor: "pointer", background: filter === "web" ? "rgba(255,255,255,0.1)" : "", color: filter === "web" ? "var(--text)" : "" }}
                     >Web</button>
                     <button 
                         className={`tag-chip ${filter === "academic" ? "active" : ""}`} 
                         onClick={() => setFilter("academic")}
                         aria-pressed={filter === "academic"}
+                        style={{ cursor: "pointer", background: filter === "academic" ? "rgba(255,255,255,0.1)" : "", color: filter === "academic" ? "var(--text)" : "" }}
                     >{t("academic")}</button>
                 </div>
 
                 <div className="cards project-grid">
                     {filteredProjects.map((proj) => (
-                        <article key={proj.id} className="card project-card">
-                            <span className="pill">{proj.pill}</span>
-                            <h3>{proj.title}</h3>
-                            <p>{t(proj.descKey)}</p>
-                            <div className="project-card-actions">
-                                <a className="cta-button secondary project-card-cta" href={proj.link}>
+                        <article key={proj.id} className="card project-card" style={{ display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+                            <span className="pill" style={{ marginBottom: "0.5rem" }}>{proj.pill}</span>
+                            <h3 style={{ margin: 0 }}>{proj.title}</h3>
+                            <p style={{ margin: 0 }}>{t(proj.descKey)}</p>
+                            <div style={{ marginTop: "auto", paddingTop: "1rem" }}>
+                                <a className="cta-button secondary" href={proj.link} style={{ padding: "0.5rem 1rem", minWidth: "auto", fontSize: "0.9rem" }}>
                                     {t("viewWork")}
                                 </a>
                             </div>

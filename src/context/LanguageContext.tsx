@@ -45,7 +45,37 @@ export const translations = {
     skillThree: "Continuous learning",
     skillFour: "Git workflow",
     contactTag: "You can reach me through email, GitHub, or LinkedIn.",
-    contactText: "I'm open to internship opportunities, feedback, and conversations about software, programming, or hardware-related work while I keep growing as a developer."
+    contactText: "I'm open to internship opportunities, feedback, and conversations about software, programming, or hardware-related work while I keep growing as a developer.",
+
+    // New keys for reference portfolio features
+    quickProfile: "Quick profile",
+    qp1: "CS student (Java, Web)",
+    qp2: "Open to internship",
+    qp3: "Accessibility focused",
+    yearsCoding: "years coding",
+    projectsDone: "projects shipped",
+    availability: "availability",
+    all: "All",
+    academic: "Academic",
+    proj1: "Console app for teams and stats (parsing, FileWriter, Scanner).",
+    proj2: "Accessible calculator without frameworks.",
+    proj3: "Todo list with local storage.",
+    proj4: "Console app to create, edit and list tasks (OOP, files).",
+    proj5: "First portfolio with i18n, particles and a contact form.",
+    proj6: "Tiny app that fetches a weather API.",
+    experience: "Experience",
+    expHelp: "Relevant projects and roles.",
+    exp1: "Academic Java projects (CLI), small web apps and Git practice.",
+    exp2: "Accessible calculator, localStorage todo and bilingual portfolio.",
+    education: "Education",
+    eduHelp: "Academic background and courses.",
+    edu1: "Courses in Java, data structures, calculus and web basics.",
+    cert1: "Git & version control",
+    cert2: "Web accessibility",
+    cert3: "Networking basics",
+    viewWork: "View work",
+    contactMe: "Contact me",
+    downloadCV: "Download CV"
   },
 
   es: {
@@ -88,8 +118,37 @@ export const translations = {
     skillThree: "Aprendizaje continuo",
     skillFour: "Flujo con Git",
     contactTag: "Puedes contactarme por email, GitHub o LinkedIn.",
-    contactText: "Estoy abierto a oportunidades de internship, feedback y conversaciones sobre software, programación o trabajos relacionados con hardware mientras sigo creciendo como desarrollador."
+    contactText: "Estoy abierto a oportunidades de internship, feedback y conversaciones sobre software, programación o trabajos relacionados con hardware mientras sigo creciendo como desarrollador.",
 
+    // Nuevas llaves para las características del portfolio de referencia
+    quickProfile: "Perfil rápido",
+    qp1: "CS student (Java, Web)",
+    qp2: "Disponible para pasantía",
+    qp3: "Enfocado en accesibilidad",
+    yearsCoding: "años de código",
+    projectsDone: "proyectos hechos",
+    availability: "disponibilidad",
+    all: "Todos",
+    academic: "Académicos",
+    proj1: "App de consola para equipos y estadísticas (parsing, FileWriter, Scanner).",
+    proj2: "Calculadora accesible sin frameworks.",
+    proj3: "Lista de tareas con almacenamiento local.",
+    proj4: "Aplicación de consola para crear, editar y listar tareas (POO, archivos).",
+    proj5: "Primer portfolio con i18n, partículas y formulario de contacto.",
+    proj6: "Widget que consume una API de clima y muestra datos básicos.",
+    experience: "Experiencia",
+    expHelp: "Proyectos y roles relevantes.",
+    exp1: "Proyectos académicos en Java (CLI), apps web pequeñas y prácticas de Git.",
+    exp2: "Calculadora accesible, lista de tareas con localStorage y portfolio bilingüe.",
+    education: "Educación",
+    eduHelp: "Formación académica y cursos.",
+    edu1: "Cursos de Java, estructura de datos, cálculo y fundamentos web.",
+    cert1: "Git y control de versiones",
+    cert2: "Accesibilidad web",
+    cert3: "Fundamentos de redes",
+    viewWork: "Ver proyectos",
+    contactMe: "Contactarme",
+    downloadCV: "Descargar CV"
   }
 };
 
@@ -99,14 +158,10 @@ interface LanguageContextType {
   t: (key: string) => string; // Función "t" (traducir) para obtener el texto
 }
 
-// 3. Crear el contexto, por defecto es 'undefined'
 export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-// 4. El "Proveedor" que envuelve nuestra aplicación
 export function LanguageProvider({ children }: { children: ReactNode }) {
 
-  // TODO PARA TI: ¿Cómo crearíamos un estado ('useState') llamado 'lang'
-  // que por defecto empiece siendo "en"?
   const [lang, setLang] = useState<Lang>('en');
   useEffect(() => {
     const saved = localStorage.getItem("lang") as Lang;
@@ -117,14 +172,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   }, []);
 
-  // TODO PARA TI: En un portfolio real, a veces leemos de 'localStorage' 
-  // Usa un useEffect para leer si ya hay un idioma guardado al cargar la página.
   useEffect(() => {
     localStorage.setItem("lang", lang);
 
   }, [lang]);
 
-  // Función ayudante que nos devuelve el texto traducido según el idioma
   const t = (key: string) => {
     return translations[lang][key as keyof typeof translations['en']] || key;
   };
@@ -136,7 +188,6 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   );
 }
 
-// 5. Un "Hook" personalizado para usar el idioma fácilmente en otros lados
 export function useLanguage() {
   const context = useContext(LanguageContext);
   if (!context) {

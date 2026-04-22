@@ -8,6 +8,33 @@ export default function Navbar() {
     const closeMenu = () => setIsMenuOpen(false);
     const [activeSection, setActiveSection] = useState("home");
 
+    const [text, setText] = useState("");
+    const [phraseIndex, setPhraseIndex] = useState(0);
+    const [isDeleting, setDeleting] = useState(false);
+
+    useEffect(() => {
+        const phrases = ["Walen I Calderon"];
+
+        let timeoutId: ReturnType<typeof setTimeout>;
+        if (isDeleting) {
+            timeoutId = setTimeout(() => {
+                setText(text.slice(0, -1));
+                if (text.length === 0) {
+                    setPhraseIndex((prevIndex) => (prevIndex + 1) % phrases.length);
+                    setDeleting(false);
+                }
+            }, 100);
+        } else {
+            timeoutId = setTimeout(() => {
+                setText(phrases[phraseIndex].slice(0, text.length + 1));
+                if (text.length === phrases[phraseIndex].length) {
+                    setDeleting(true);
+                }
+            }, 150);
+        }
+        return () => clearTimeout(timeoutId);
+    }, [text, phraseIndex, isDeleting]);
+
     useEffect(() => {
         const handleScroll = () => {
             const sections = Array.from(document.querySelectorAll("main section[id]"));
@@ -44,22 +71,9 @@ export default function Navbar() {
     return (
         <nav>
             <div className="nav-shell">
-                <a
-                    className="brand-text"
-                    href="#home"
-                    style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        width: "240px",
-                        justifyContent: "flex-start",
-                        paddingLeft: 0,
-                        overflow: "hidden",
-                        flexShrink: 0,
-                    }}
-                >
-                    <span className="grad" style={{ textShadow: "0 0 12px rgba(86,194,255,0.4)", letterSpacing: "1px" }}>
-                        Walen I Calderon
-                    </span>
+                <a className="brand-text" href="#home" style={{ display: 'inline-flex', alignItems: 'center', width: "240px", justifyContent: "flex-start", paddingLeft: 0, overflow: "hidden", flexShrink: 0 }}>
+                    <span className="grad" style={{ textShadow: "0 0 12px rgba(86,194,255,0.4)", letterSpacing: "1px" }}>{text}</span>
+                    <span className="cursor" style={{ color: "var(--brand)" }}>|</span>
                 </a>
 
                 <input

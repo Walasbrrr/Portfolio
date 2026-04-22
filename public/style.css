@@ -1,4 +1,4 @@
-S:root {
+:root {
   --bg: #050C16;
   --bg-soft: #0B1628;
   --surface: #11233C;
@@ -94,7 +94,7 @@ textarea {
 
 /* Layout */
 .container {
-  width: min(1120px, calc(100% - 2rem));
+  width: min(1300px, calc(100% - 3rem));
   margin: 0 auto;
 }
 
@@ -112,8 +112,9 @@ nav {
   min-height: 76px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  justify-content: flex-start;
+  gap: 2rem;
+  padding: 0 6%;
   position: relative;
 }
 
@@ -133,6 +134,8 @@ nav ul {
   padding: 0;
 }
 
+
+
 nav li {
   position: relative;
 }
@@ -144,6 +147,18 @@ nav a,
   padding: 0.75rem 1rem;
   border-radius: 999px;
   transition: 0.25s ease;
+  white-space: nowrap;
+}
+
+.filters {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.filters .tag-chip {
+  cursor: pointer;
 }
 
 .nav-link:hover,
@@ -296,9 +311,16 @@ nav a,
 }
 
 
-.cursor {
+.type-cursor {
   color: var(--brand);
+  margin-left: 2px;
   animation: blink 0.8s steps(1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .type-cursor {
+    display: none;
+  }
 }
 
 @keyframes blink {
@@ -452,6 +474,17 @@ nav a,
   max-width: 34ch;
 }
 
+.project-card-actions {
+  margin-top: auto;
+  padding-top: 1rem;
+}
+
+.project-card-cta {
+  padding: 0.5rem 1rem;
+  min-width: auto;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 1100px) {
   .project-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -492,6 +525,36 @@ nav a,
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--muted);
+  transition: all 0.2s ease;
+}
+
+.tag-chip:hover,
+.tag-chip.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+  border-color: rgba(255, 255, 255, 0.16);
+}
+
+/* === Factor WOW: Gradiente Animado === */
+.animated-gradient {
+  background: linear-gradient(
+    to right, 
+    var(--brand), 
+    var(--brand-strong), 
+    #b18aff, 
+    var(--brand)
+  );
+  background-size: 300% auto;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 4s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: 300% center;
+  }
 }
 
 /* Responsive */
@@ -509,9 +572,14 @@ nav a,
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 1050px) {
+  .nav-shell {
+    padding: 0 5%;
+  }
+
   .menu-btn {
     display: inline-flex;
+    margin-left: auto;
   }
 
   nav ul {
@@ -527,6 +595,7 @@ nav a,
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 22px;
     box-shadow: var(--shadow);
+    z-index: 100;
   }
 
   #click:checked~ul {
@@ -544,6 +613,9 @@ nav a,
     position: static;
     margin-top: 0.5rem;
   }
+}
+
+@media (max-width: 760px) {
 
   .home {
     padding-top: 4rem;

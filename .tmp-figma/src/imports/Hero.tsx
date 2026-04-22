@@ -1,36 +1,7 @@
-import { useEffect, useMemo, useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
     const { t, lang } = useLanguage();
-    const [typedSubtitle, setTypedSubtitle] = useState("");
-
-    const subtitle = useMemo(() => t("subtitle"), [t]);
-
-    useEffect(() => {
-        // Type once (non-looping). Respect reduced motion.
-        const reduceMotion =
-            typeof window !== "undefined" &&
-            window.matchMedia &&
-            window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-        if (reduceMotion) {
-            setTypedSubtitle(subtitle);
-            return;
-        }
-
-        setTypedSubtitle("");
-        let i = 0;
-        const id = window.setInterval(() => {
-            i += 1;
-            setTypedSubtitle(subtitle.slice(0, i));
-            if (i >= subtitle.length) {
-                window.clearInterval(id);
-            }
-        }, 22);
-
-        return () => window.clearInterval(id);
-    }, [subtitle, lang]);
 
     return (
         <section id="home" className="home">
@@ -39,19 +10,14 @@ export default function Hero() {
                 <div className="hero-copy card hero-panel">
 
                     <p className="eyebrow">
-                        <span>{typedSubtitle}</span>
-                        <span className="type-cursor" aria-hidden="true">
-                            |
-                        </span>
+                        {t("subtitle")}
                     </p>
 
                     <h1>
                         <span style={{ display: "block", fontSize: "1.4rem", color: "var(--muted)", marginBottom: "0.5rem" }}>
                             {lang === 'es' ? "Hola, soy " : "Hi, I'm "}
                         </span>
-                        <span className="animated-gradient">
-                            {lang === "es" ? "Desarrollador de software" : "Software Developer"}
-                        </span>
+                        <span className="animated-gradient">Walen Calderon</span>
                     </h1>
 
                     <p className="hero-description">
