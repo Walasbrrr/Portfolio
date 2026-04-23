@@ -955,25 +955,29 @@
 
     /* ── Menú principal (slide + fade) ── */
     #primary-navigation {
-      position: absolute;
-      top: calc(100% + 0.65rem);
-      left: 1rem;
-      right: 1rem;
+      /* Posición relativa al viewport para evitar desbordamiento */
+      position: fixed;
+      top: calc(76px + 0.65rem);
+      left: 0.75rem;
+      right: 0.75rem;
 
       flex-direction: column;
       align-items: stretch;
       gap: 0.2rem;
       padding: 0.75rem;
 
-      background: color-mix(in oklab, var(--background) 82%, transparent);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
+      /* Mismo color y blur que el navbar — consistencia visual */
+      background: color-mix(in oklab, var(--background) 70%, transparent);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
       border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow:
-        0 8px 48px rgba(0, 0, 0, 0.48),
-        inset 0 1px 0 rgba(255, 255, 255, 0.05);
-      z-index: 100;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      z-index: 200;
+
+      /* No se sale por abajo en pantallas pequeñas */
+      max-height: calc(100svh - 96px - 1rem);
+      overflow-y: auto;
 
       /* Estado oculto */
       visibility: hidden;
