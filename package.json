@@ -4,6 +4,9 @@
   "description": "This repository is were i will been testing and making my portfolio better implementing the tech i will be learning over time",
   "main": "scripts.js",
   "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "typecheck": "tsc --noEmit"

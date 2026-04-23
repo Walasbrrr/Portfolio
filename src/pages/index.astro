@@ -12,14 +12,14 @@ import ContactSection    from "../components/ContactSection";
 ---
 
 <BaseLayout>
-  {/* Sincroniza localStorage → store, sin renderizar nada */}
+  <!-- Sincroniza localStorage → store, sin renderizar nada -->
   <LangInit client:load />
 
-  {/* Interactivos inmediatos: scroll spy, animación de tipeo */}
+  <!-- Interactivos inmediatos: scroll spy, animación de tipeo -->
   <Navbar client:load />
   <Hero   client:load />
 
-  {/* Secciones: se hidratan en idle (el browser las hidrata cuando está libre) */}
+  <!-- Secciones: se hidratan cuando el browser está libre -->
   <AboutSection      client:idle />
   <ProjectsSection   client:idle />
   <SkillsSection     client:idle />
