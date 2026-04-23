@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useLanguage } from '../context/LanguageContext';
+import { useState, useEffect, useRef } from "react";
+import { useLanguage } from '../stores/languageStore';
 import LanguageDropdown from './LanguageDropdown';
 
 export default function Navbar() {
@@ -7,6 +7,19 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
     const [activeSection, setActiveSection] = useState("home");
+    const navRef = useRef<HTMLDivElement>(null);
+
+    // Cierra el menú al hacer click fuera del nav
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const handler = (e: MouseEvent) => {
+            if (navRef.current && !navRef.current.contains(e.target as Node)) {
+                setIsMenuOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handler);
+        return () => document.removeEventListener('mousedown', handler);
+    }, [isMenuOpen]);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -43,17 +56,16 @@ export default function Navbar() {
 
     return (
         <nav>
-            <div className="nav-shell">
+            <div className="nav-shell" ref={navRef}>
                 <a
                     className="brand-text"
                     href="#home"
+                    onClick={closeMenu}
                     style={{
                         display: "inline-flex",
                         alignItems: "center",
-                        width: "240px",
                         justifyContent: "flex-start",
                         paddingLeft: 0,
-                        overflow: "hidden",
                         flexShrink: 0,
                     }}
                 >
@@ -71,29 +83,22 @@ export default function Navbar() {
                     aria-label="Toggle Menu"
                 />
 
-                <label htmlFor="click" className="menu-btn" aria-label="Open menu">
-                    <i className="fas fa-bars" aria-hidden="true"></i>
+                <label
+                    htmlFor="click"
+                    className={`menu-btn${isMenuOpen ? ' is-open' : ''}`}
+                    aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={isMenuOpen}
+                >
+                    <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`} aria-hidden="true"></i>
                 </label>
 
-                <ul id="primary-navigation">
+                <ul id="primary-navigation" className={isMenuOpen ? 'is-open' : ''}>
 
                     {<LanguageDropdown />}
 
-
-                    {/* Enlaces listos */}
                     <li>
                         <a className={`nav-link ${activeSection === "home" ? "active" : ""}`} href="#home" onClick={closeMenu}>
                             {t("home")}
-                        </a>
-                    </li>
-                    <li>
-                        <a className={`nav-link ${activeSection === "about" ? "active" : ""}`} href="#about" onClick={closeMenu}>
-                            {t("about")}
-                        </a>
-                    </li>
-                    <li>
-                        <a className={`nav-link ${activeSection === "projects" ? "active" : ""}`} href="#projects" onClick={closeMenu}>
-                            {t("projects")}
                         </a>
                     </li>
                     <li>
@@ -102,18 +107,19 @@ export default function Navbar() {
                         </a>
                     </li>
                     <li>
-                        <a className={`nav-link ${activeSection === "experience" ? "active" : ""}`} href="#experience" onClick={closeMenu}>
-                            {t("experience")}
-                        </a>
-                    </li>
-                    <li>
-                        <a className={`nav-link ${activeSection === "education" ? "active" : ""}`} href="#education" onClick={closeMenu}>
-                            {t("education")}
+                        <a className={`nav-link ${activeSection === "projects" ? "active" : ""}`} href="#projects" onClick={closeMenu}>
+                            {t("projects")}
                         </a>
                     </li>
                     <li>
                         <a className={`nav-link ${activeSection === "contact" ? "active" : ""}`} href="#contact" onClick={closeMenu}>
                             {t("contact")}
+                        </a>
+                    </li>
+                    <li className="nav-cta">
+                        <a className="cta-button secondary nav-cv" href="#" onClick={closeMenu}>
+                            <i className="fas fa-download" aria-hidden="true" style={{ marginRight: 8 }}></i>
+                            {t("downloadCV")}
                         </a>
                     </li>
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../stores/languageStore";
 
 export default function ProjectSection() {
     const { t } = useLanguage();

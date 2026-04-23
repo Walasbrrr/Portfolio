@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../stores/languageStore";
 
 export default function Hero() {
     const { t, lang } = useLanguage();
@@ -34,9 +34,13 @@ export default function Hero() {
 
     return (
         <section id="home" className="home">
-            <div className="container hero-layout">
+            <div className="container hero-layout hero-figma">
 
                 <div className="hero-copy card hero-panel">
+                    <div className="hero-badge">
+                        <i className="fas fa-sparkles" aria-hidden="true"></i>
+                        <span>{t("heroBadge")}</span>
+                    </div>
 
                     <p className="eyebrow">
                         <span>{typedSubtitle}</span>
@@ -46,49 +50,75 @@ export default function Hero() {
                     </p>
 
                     <h1>
-                        <span style={{ display: "block", fontSize: "1.4rem", color: "var(--muted)", marginBottom: "0.5rem" }}>
-                            {lang === 'es' ? "Hola, soy " : "Hi, I'm "}
+                        <span className="hero-pretitle">
+                            {lang === "es" ? "Hola, soy" : "Hi, I'm"}
                         </span>
-                        <span className="animated-gradient">
-                            {lang === "es" ? "Desarrollador de software" : "Software Developer"}
-                        </span>
+                        <span className="hero-title animated-gradient">Walen Calderon</span>
                     </h1>
 
-                    <p className="hero-description">
-                        {t("description")}
+                    <p className="hero-role">
+                        {t("heroRole")}
                     </p>
 
-                    <div className="hero-actions">
-                        <a className="cta-button primary" href="#projects">{t("ctaProjects")}</a>
-                        <a className="cta-button secondary" href="#contact">{t("ctaContact")}</a>
-                        <a className="cta-button secondary" href="#">{t("downloadCV")}</a>
+                    <div className="hero-actions hero-actions-figma">
+                        <a className="cta-button primary" href="#projects">
+                            {t("heroCtaViewProjects")}
+                            <i className="fas fa-external-link-alt" aria-hidden="true" style={{ marginLeft: 10, fontSize: 12 }}></i>
+                        </a>
+                        <a className="cta-button secondary" href="#">
+                            <i className="fas fa-download" aria-hidden="true" style={{ marginRight: 10, fontSize: 12 }}></i>
+                            {t("heroCtaDownloadCv")}
+                        </a>
+                    </div>
+
+                    <div className="hero-social">
+                        <a className="social-btn" href="https://github.com/Walasbrrr" target="_blank" rel="noreferrer" aria-label="GitHub">
+                            <i className="fab fa-github" aria-hidden="true"></i>
+                        </a>
+                        <a className="social-btn" href="https://www.linkedin.com/in/walen-calderon-a017b42a4/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
+                            <i className="fab fa-linkedin-in" aria-hidden="true"></i>
+                        </a>
+                        <a className="social-btn" href="mailto:walenculd@gmail.com" aria-label="Email">
+                            <i className="fas fa-envelope" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </div>
 
-                <aside className="card hero-panel hero-side">
-                    <div>
-                        <strong style={{ fontSize: "1.2rem", display: "block", marginBottom: "0.5rem" }}>{t("quickProfile")}</strong>
-                        <ul className="muted" style={{ margin: 0, paddingLeft: "18px", marginBottom: "1rem", lineHeight: "1.8" }}>
-                            <li>{t("qp1")}</li>
-                            <li>{t("qp2")}</li>
-                            <li>{t("qp3")}</li>
-                        </ul>
+                <aside className="card hero-panel hero-side hero-side-figma">
+                    <div className="stat-hero stat-hero-wide">
+                        <div className="stat-hero-top">
+                            <div>
+                                <div className="stat-hero-label">{t("heroStatsProjectsDoneLabel")}</div>
+                                <div className="stat-hero-value">13+</div>
+                            </div>
+                            <div className="stat-hero-icon" aria-hidden="true">
+                                <i className="fas fa-sparkles"></i>
+                            </div>
+                        </div>
+                        <div className="stat-hero-bar">
+                            <i style={{ width: "78%" }}></i>
+                        </div>
                     </div>
 
-                    <div className="stat-list">
-                        <div className="stat-item">
-                            <strong>1.5+</strong>
-                            <span>{t("yearsCoding")}</span>
+                    <div className="stat-hero-grid">
+                        <div className="stat-hero">
+                            <div className="stat-hero-label">{t("heroStatsYearsLabel")}</div>
+                            <div className="stat-hero-value">8+</div>
                         </div>
-
-                        <div className="stat-item">
-                            <strong>8+</strong>
-                            <span>{t("projectsDone")}</span>
+                        <div className="stat-hero">
+                            <div className="stat-hero-label">{t("heroStatsSatisfactionLabel")}</div>
+                            <div className="stat-hero-value">100%</div>
                         </div>
+                    </div>
 
-                        <div className="stat-item">
-                            <strong>100%</strong>
-                            <span>{t("availability")}</span>
+                    <div className="stat-hero stat-hero-wide">
+                        <div className="stat-hero-label">{t("heroSpecialtiesLabel")}</div>
+                        <div className="hero-chips">
+                            <span className="chip">React</span>
+                            <span className="chip">TypeScript</span>
+                            <span className="chip">Node.js</span>
+                            <span className="chip">UI/UX</span>
+                            <span className="chip">APIs</span>
                         </div>
                     </div>
                 </aside>

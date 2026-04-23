@@ -1,9 +1,5 @@
-import { createContext, useState, useEffect, ReactNode, useContext } from 'react';
-
-// 1. Tipos de TypeScript: Nos aseguran de no cometer errores de tipeo
 export type Lang = 'en' | 'es';
 
-// 2. Diccionario que saqué de tu "scripts.js"
 export const translations = {
   en: {
     typingOne: "Welcome to my Portfolio!",
@@ -46,8 +42,6 @@ export const translations = {
     skillFour: "Git workflow",
     contactTag: "You can reach me through email, GitHub, or LinkedIn.",
     contactText: "I'm open to internship opportunities, feedback, and conversations about software, programming, or hardware-related work while I keep growing as a developer.",
-
-    // New keys for reference portfolio features
     quickProfile: "Quick profile",
     qp1: "CS student (Java, Web)",
     qp2: "Open to internship",
@@ -76,8 +70,6 @@ export const translations = {
     viewWork: "View work",
     contactMe: "Contact me",
     downloadCV: "Download CV",
-
-    // Figma hero (new)
     heroBadge: "Available for new projects",
     heroRole: "Full Stack Developer passionate about building delightful web experiences. Specialized in React, TypeScript and UI/UX.",
     heroCtaViewProjects: "View projects",
@@ -85,7 +77,7 @@ export const translations = {
     heroStatsProjectsDoneLabel: "Projects completed",
     heroStatsYearsLabel: "Years of experience",
     heroStatsSatisfactionLabel: "Satisfaction",
-    heroSpecialtiesLabel: "Specialties"
+    heroSpecialtiesLabel: "Specialties",
   },
 
   es: {
@@ -129,8 +121,6 @@ export const translations = {
     skillFour: "Flujo con Git",
     contactTag: "Puedes contactarme por email, GitHub o LinkedIn.",
     contactText: "Estoy abierto a oportunidades de internship, feedback y conversaciones sobre software, programación o trabajos relacionados con hardware mientras sigo creciendo como desarrollador.",
-
-    // Nuevas llaves para las características del portfolio de referencia
     quickProfile: "Perfil rápido",
     qp1: "CS student (Java, Web)",
     qp2: "Disponible para pasantía",
@@ -159,8 +149,6 @@ export const translations = {
     viewWork: "Ver proyectos",
     contactMe: "Contactarme",
     downloadCV: "Descargar CV",
-
-    // Figma hero (new)
     heroBadge: "Disponible para nuevos proyectos",
     heroRole: "Desarrollador Full Stack apasionado por crear experiencias web increíbles. Especializado en React, TypeScript y diseño UI/UX.",
     heroCtaViewProjects: "Ver proyectos",
@@ -168,50 +156,6 @@ export const translations = {
     heroStatsProjectsDoneLabel: "Proyectos completados",
     heroStatsYearsLabel: "Años de experiencia",
     heroStatsSatisfactionLabel: "Satisfacción",
-    heroSpecialtiesLabel: "Especialidades"
-  }
-};
-
-interface LanguageContextType {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
-  t: (key: string) => string; // Función "t" (traducir) para obtener el texto
-}
-
-export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-export function LanguageProvider({ children }: { children: ReactNode }) {
-
-  const [lang, setLang] = useState<Lang>('en');
-  useEffect(() => {
-    const saved = localStorage.getItem("lang") as Lang;
-
-    if (saved === "en" || saved === "es") {
-      setLang(saved);
-    }
-
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("lang", lang);
-
-  }, [lang]);
-
-  const t = (key: string) => {
-    return translations[lang][key as keyof typeof translations['en']] || key;
-  };
-
-  return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-}
-
-export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage debe usarse dentro de un LanguageProvider");
-  }
-  return context;
-}
+    heroSpecialtiesLabel: "Especialidades",
+  },
+} as const;

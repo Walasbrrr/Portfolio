@@ -1,4 +1,4 @@
-import { useLanguage } from "../context/LanguageContext";
+import { useLanguage } from "../stores/languageStore";
 
 export default function SkillsSection() {
     const { t } = useLanguage();

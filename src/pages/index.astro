@@ -1,8 +1,29 @@
 ---
-import PortfolioApp from "../components/PortfolioApp";
 import BaseLayout from "../layouts/baseLayout.astro";
+import LangInit      from "../components/LangInit";
+import Navbar        from "../components/Navbar";
+import Hero          from "../components/Hero";
+import AboutSection      from "../components/AboutSection";
+import ProjectsSection   from "../components/ProjectsSection";
+import SkillsSection     from "../components/SkillsSection";
+import ExperienceSection from "../components/ExperienceSection";
+import EducationSection  from "../components/EducationSection";
+import ContactSection    from "../components/ContactSection";
 ---
 
 <BaseLayout>
-  <PortfolioApp client:only="react" />
+  {/* Sincroniza localStorage → store, sin renderizar nada */}
+  <LangInit client:load />
+
+  {/* Interactivos inmediatos: scroll spy, animación de tipeo */}
+  <Navbar client:load />
+  <Hero   client:load />
+
+  {/* Secciones: se hidratan en idle (el browser las hidrata cuando está libre) */}
+  <AboutSection      client:idle />
+  <ProjectsSection   client:idle />
+  <SkillsSection     client:idle />
+  <ExperienceSection client:idle />
+  <EducationSection  client:idle />
+  <ContactSection    client:idle />
 </BaseLayout>
