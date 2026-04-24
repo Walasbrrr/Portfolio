@@ -3,7 +3,7 @@
 > [!info] Propósito de este documento
 > Explicación exhaustiva de cada tecnología que conforma este portfolio: qué es, por qué existe, cómo se integra con las demás y qué fragmentos de código la demuestran.
 
-#portfolio #astro #react #typescript #tailwind #frontend
+#portfolio #astro #react #typescript #tailwind #nanostores #islands #vercel #frontend
 
 ---
 
@@ -18,39 +18,45 @@
 7. [[#CSS Custom Properties (Design Tokens)]]
 8. [[#CSS @layer]]
 9. [[#IntersectionObserver API]]
-10. [[#Context API de React]]
+10. [[#Nanostores (estado global)]]
 11. [[#localStorage]]
 12. [[#Google Fonts]]
 13. [[#Font Awesome]]
 14. [[#ESLint (Flat Config)]]
 15. [[#npm y el ecosistema de módulos]]
 16. [[#Git]]
-17. [[#Cómo se conecta todo]]
+17. [[#Vercel y Speed Insights]]
+18. [[#Cómo se conecta todo]]
 
 ---
 
 ## Visión general del stack
 
 ```
-┌─────────────────────────────────────────────────────────┐
-│                      Astro 5                            │
-│  (motor de build, enrutamiento, layout .astro)          │
-│                                                         │
-│   ┌──────────────────┐   ┌────────────────────────┐    │
-│   │  React 19 (TSX)  │   │  Tailwind CSS 3         │   │
-│   │  Componentes UI  │   │  + globals.css          │   │
-│   └──────────────────┘   └────────────────────────┘    │
-│           │                         │                   │
-│   ┌───────▼─────────────────────────▼──────────────┐   │
-│   │         PostCSS + Autoprefixer                  │   │
-│   │         (procesa el CSS final)                  │   │
-│   └─────────────────────────────────────────────────┘   │
-│                                                         │
-│   TypeScript · ESLint · npm · Git                       │
-└─────────────────────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────────────┐
+│                        Astro 5 (SSG + Islands)               │
+│   baseLayout.astro · index.astro · <script> bundleados       │
+│                                                              │
+│   ┌─────────────────────────────┐  ┌─────────────────────┐   │
+│   │  React 19 Islands           │  │  Tailwind 3          │  │
+│   │  Navbar, Hero, *Section     │  │  + globals.css       │  │
+│   │  (client:load / client:idle)│  │  + tokens CSS vars   │  │
+│   └─────────────────────────────┘  └──────────────────────┘  │
+│              │                                               │
+│   ┌──────────▼─────────────┐                                 │
+│   │  nanostores            │                                 │
+│   │  $lang atom singleton  │ ← cruza islands sin Provider    │
+│   └────────────────────────┘                                 │
+│                                                              │
+│   ┌──────────────────────────────────────────────────────┐   │
+│   │         PostCSS + Autoprefixer                        │  │
+│   └──────────────────────────────────────────────────────┘   │
+│                                                              │
+│   TypeScript · ESLint · npm · Git · Vercel + Speed Insights  │
+└──────────────────────────────────────────────────────────────┘
 ```
 
-El código fuente vive en `src/`. Astro compila todo a HTML + JS + CSS estático que el navegador puede cargar sin servidor.
+El código fuente vive en `src/`. Astro compila todo a HTML + JS + CSS estático que Vercel sirve desde su CDN global. Los islands se hidratan **independientemente**, no como un solo árbol React.
 
 ---
 
@@ -74,36 +80,47 @@ Un archivo `.astro` tiene dos zonas separadas por `---`:
 ---
 // Zona de "frontmatter" — se ejecuta SOLO en build time (Node.js)
 // Aquí se hacen imports, fetch de datos, lógica de servidor
-import PortfolioApp from "../components/PortfolioApp";
 import BaseLayout from "../layouts/baseLayout.astro";
+import LangInit          from "../components/LangInit";
+import Navbar            from "../components/Navbar";
+import Hero              from "../components/Hero";
+import AboutSection      from "../components/AboutSection";
+import ProjectsSection   from "../components/ProjectsSection";
+import SkillsSection     from "../components/SkillsSection";
+import ExperienceSection from "../components/ExperienceSection";
+import EducationSection  from "../components/EducationSection";
+import ContactSection    from "../components/ContactSection";
 ---
 
-<!-- Zona de template — HTML + componentes -->
+<!-- Zona de template — cada sección es un island independiente -->
 <BaseLayout>
-  <PortfolioApp client:load />
+  <LangInit client:load />              <!-- invisible, sincroniza localStorage -->
+  <Navbar   client:load />              <!-- interactivo inmediato -->
+  <Hero     client:load />              <!-- tipeo animado -->
+
+  <AboutSection      client:idle />     <!-- hidratan cuando el browser está libre -->
+  <ProjectsSection   client:idle />
+  <SkillsSection     client:idle />
+  <ExperienceSection client:idle />
+  <EducationSection  client:idle />
+  <ContactSection    client:idle />
 </BaseLayout>
 ```
 
 La parte entre `---` no llega al navegador. Es código que corre durante la compilación.
 
-### Directiva `client:load`
+### Directivas `client:*` — el corazón de Islands
 
-```astro
-<PortfolioApp client:load />
-```
+Cada island es un bundle JS **independiente**. Astro solo envía al navegador el JS de los componentes que llevan una directiva `client:*`:
 
-Esta directiva le dice a Astro: *"Este componente de React necesita JavaScript en el cliente; hidrátaló tan pronto como la página cargue."*
+| Directiva        | Cuándo hidrata                       | Uso en este portfolio                       |
+| ---------------- | ------------------------------------ | ------------------------------------------- |
+| `client:load`    | Inmediatamente al cargar la página   | `Navbar`, `Hero`, `LangInit`                |
+| `client:idle`    | Cuando el browser está en idle       | Todas las secciones estáticas con i18n      |
+| `client:visible` | Cuando el elemento entra en viewport | (no usado aún, candidato para secciones)    |
+| `client:only`    | Solo en cliente, sin SSR             | (no usado; rompe el SEO)                    |
 
-Astro tiene varias directivas:
-
-| Directiva | Cuándo hidrata |
-|-----------|----------------|
-| `client:load` | Inmediatamente al cargar |
-| `client:idle` | Cuando el browser esté libre |
-| `client:visible` | Cuando el elemento sea visible |
-| `client:only` | Solo en cliente, nunca server-side |
-
-Se usó `client:load` porque la navbar, el hero con tipeo y el context de idioma necesitan estar listos desde el primer momento.
+**Por qué importa el split**: si todo fuera `client:load`, el browser descargaría y parsearía todo el JavaScript de React antes de pintar la página → LCP alto. Con `client:idle` las secciones estáticas esperan a que el navegador termine lo urgente y luego se hidratan sin bloquear el primer paint.
 
 ### Layout (`baseLayout.astro`)
 
@@ -121,9 +138,22 @@ import "../styles/globals.css";
       <slot />   <!-- aquí se inyecta el contenido de cada página -->
     </main>
     <footer>...</footer>
+
+    <!-- Vercel Speed Insights: Core Web Vitals en producción -->
+    <script>
+      import { injectSpeedInsights } from "@vercel/speed-insights";
+      injectSpeedInsights();
+    </script>
+
+    <!-- Animaciones de scroll: vanilla JS, cero overhead de React -->
+    <script>
+      // IntersectionObserver fuera de React → no aumenta ningún bundle
+    </script>
   </body>
 </html>
 ```
+
+Nota importante: los `<script>` sin atributos en Astro son procesados por Vite y **se bundlean automáticamente** — resuelven imports de paquetes npm, se minifican y se cachean. No son lo mismo que un `<script>` inline tradicional.
 
 `<slot />` es el equivalente de `{children}` en React. Todo lo que esté dentro de `<BaseLayout>` en `index.astro` se renderiza donde está el `<slot />`.
 
@@ -173,18 +203,23 @@ Con `react-jsx` no necesitas importar React en cada archivo; el compilador lo ha
 
 ### Componentes usados
 
-| Componente | Responsabilidad |
-|-----------|----------------|
-| `PortfolioApp` | Raíz React; monta todo, registra el IntersectionObserver |
-| `Navbar` | Barra de navegación sticky con scroll spy |
-| `Hero` | Sección principal con tipeo animado y estadísticas |
-| `AboutSection` | Sección sobre mí |
-| `ProjectsSection` | Grid de proyectos con filtros |
-| `SkillsSection` | Barras de habilidades y chips |
-| `ExperienceSection` | Timeline de experiencia |
-| `EducationSection` | Formación académica |
-| `ContactSection` | Links de contacto |
-| `LanguageDropdown` | Selector de idioma |
+Cada uno es un **island independiente** con su propio bundle JS:
+
+| Componente          | Directiva       | Responsabilidad                                                  |
+| ------------------- | --------------- | ---------------------------------------------------------------- |
+| `LangInit`          | `client:load`   | Lee `localStorage.lang` y sincroniza el nanostore en el mount    |
+| `Navbar`            | `client:load`   | Barra sticky con scroll spy, menú hamburguesa, click-outside     |
+| `Hero`              | `client:load`   | Tipeo animado con `requestAnimationFrame`                        |
+| `AboutSection`      | `client:idle`   | Sección "sobre mí" traducida                                     |
+| `ProjectsSection`   | `client:idle`   | Grid de proyectos con filtros                                    |
+| `SkillsSection`     | `client:idle`   | Barras de habilidades y chips                                    |
+| `ExperienceSection` | `client:idle`   | Timeline de experiencia                                          |
+| `EducationSection`  | `client:idle`   | Formación académica                                              |
+| `ContactSection`    | `client:idle`   | Links de contacto                                                |
+| `LanguageDropdown`  | (dentro Navbar) | Selector de idioma con glassmorphism y rotación del caret        |
+
+> [!note] `PortfolioApp.tsx` fue eliminado
+> En la primera versión del proyecto existía un único componente raíz `PortfolioApp` con `client:load` que envolvía todo con `<LanguageProvider>`. Esto convertía el portfolio en un SPA de React disfrazado. Se eliminó durante el refactoring a islands. Ver [[refactoring-islands-nanostores]].
 
 ### Hooks utilizados
 
@@ -531,41 +566,44 @@ Las utilidades siempre ganan sobre los componentes, y los componentes sobre la b
 
 `IntersectionObserver` es una API nativa del navegador que detecta cuándo un elemento **entra o sale del viewport** (la parte visible de la pantalla). Es la manera moderna y eficiente de hacer animaciones al hacer scroll.
 
-### Implementación en `PortfolioApp.tsx`
+### Implementación en `baseLayout.astro` (vanilla JS)
 
-```tsx
-useEffect(() => {
+Originalmente estaba en `PortfolioApp.tsx` dentro de un `useEffect`, lo que forzaba hidratar React solo para escuchar scroll. Después del refactoring vive en un `<script>` de Astro en `baseLayout.astro` — es **vanilla JS** que Vite bundlea pero que no pertenece a ningún island de React:
+
+```astro
+<script>
   // Respeta prefers-reduced-motion (accesibilidad)
   const reduceMotion =
     window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (reduceMotion) return;
 
-  // 1. Selecciona todos los elementos que se van a animar
-  const targets = Array.from(
-    document.querySelectorAll<HTMLElement>(
-      ".section-head, .card, .hero-badge, .hero-actions, .hero-social"
-    )
-  );
+  const setup = () => {
+    // 1. Selecciona todos los elementos que se van a animar
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>(
+        ".section-head, .card, .hero-badge, .hero-actions, .hero-social"
+      )
+    );
 
-  // 2. Añade la clase .reveal (los hace invisibles con opacity:0 + translateY)
-  targets.forEach((el) => el.classList.add("reveal"));
+    // 2. Añade la clase .reveal (los hace invisibles con opacity:0 + translateY)
+    targets.forEach((el) => el.classList.add("reveal"));
 
-  // 3. Crea el Observer
-  const io = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // 4. Cuando el elemento es visible, añade .is-visible (anima a opacity:1)
-          entry.target.classList.add("is-visible");
-          io.unobserve(entry.target); // deja de observarlo (la animación es de una vez)
-        }
-      });
-    },
-    {
-      threshold: 0.12,       // el elemento debe estar 12% visible para dispararse
-      rootMargin: "0px 0px -10% 0px"  // el trigger es 10% antes del borde inferior
-    }
-  );
+    // 3. Crea el Observer
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // 4. Cuando el elemento es visible, añade .is-visible
+            entry.target.classList.add("is-visible");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12,       // el elemento debe estar 12% visible para dispararse
+        rootMargin: "0px 0px -10% 0px"  // el trigger es 10% antes del borde inferior
+      }
+    );
 
   targets.forEach((el) => io.observe(el));
 
@@ -610,79 +648,95 @@ useEffect(() => {
 
 ---
 
-## Context API de React
+## Nanostores (estado global)
 
-### ¿Qué problema resuelve?
+### ¿Qué es y por qué no usamos React Context?
 
-Sin Context, pasar el idioma actual a todos los componentes requeriría "prop drilling": pasar `lang` y `setLang` de `PortfolioApp` → `Navbar` → `LanguageDropdown`, y también de `PortfolioApp` → `Hero`, `AboutSection`, `ProjectsSection`, etc. Con 8+ componentes, esto se vuelve inmanejable.
+**Nanostores** es una librería de estado global **agnóstica de framework** con un bundle de solo ~300 bytes. Usa el patrón *atom* (inspirado en Jotai/Recoil): un átomo es un contenedor de valor con un API mínimo de `get()`/`set()`/`subscribe()`.
 
-Context crea un "almacén global" que cualquier componente descendiente puede leer directamente.
+> [!warning] Por qué Context no servía aquí
+> React Context requiere que todos los consumidores estén dentro de un `<Provider>`. Pero en arquitectura **Islands** cada sección es un island independiente sin padre React común. Si quisiéramos compartir idioma con Context, tendríamos que envolver todo en un solo island → volver al SPA → perder todo el beneficio de Astro.
+>
+> Nanostores resuelve esto porque el átomo **vive en el scope del módulo JavaScript**, no en un árbol React. Cualquier código (React o vanilla) que importe `$lang` lee y escribe el mismo valor.
 
-### Implementación en `LanguageContext.tsx`
+### Implementación en `src/stores/languageStore.ts`
 
-```tsx
-// 1. Definir el tipo del contexto
-interface LanguageContextType {
-  lang: Lang;
-  setLang: (lang: Lang) => void;
-  t: (key: string) => string;
+```ts
+import { atom } from 'nanostores';
+import { useStore } from '@nanostores/react';
+import { useCallback } from 'react';
+import { translations, type Lang } from '../i18n/translations';
+
+// 1. El átomo: un singleton a nivel de módulo
+export const $lang = atom<Lang>('en');
+
+export type { Lang };
+
+// 2. Setter con side-effect (persiste en localStorage)
+export function setLang(lang: Lang): void {
+    $lang.set(lang);
+    if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('lang', lang);
+    }
 }
 
-// 2. Crear el contexto (con undefined como valor inicial)
-export const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
-
-// 3. El Provider: envuelve la app y provee el valor
-export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>('en');
-
-  // Leer el idioma guardado al montar
-  useEffect(() => {
-    const saved = localStorage.getItem("lang") as Lang;
-    if (saved === "en" || saved === "es") setLang(saved);
-  }, []);
-
-  // Guardar cuando cambia
-  useEffect(() => {
-    localStorage.setItem("lang", lang);
-  }, [lang]);
-
-  // Función de traducción
-  const t = (key: string) => {
-    return translations[lang][key as keyof typeof translations['en']] || key;
-  };
-
-  return (
-    <LanguageContext.Provider value={{ lang, setLang, t }}>
-      {children}
-    </LanguageContext.Provider>
-  );
-}
-
-// 4. Hook personalizado para consumir el contexto (con guard de error)
+// 3. Hook con la misma API que el Context anterior — migración 1:1
 export function useLanguage() {
-  const context = useContext(LanguageContext);
-  if (!context) {
-    throw new Error("useLanguage debe usarse dentro de un LanguageProvider");
-  }
-  return context;
+    const lang = useStore($lang); // suscribe React al átomo
+
+    const t = useCallback(
+        (key: string) => translations[lang][key as keyof typeof translations['en']] || key,
+        [lang]
+    );
+
+    return { lang, setLang, t };
 }
 ```
+
+### El componente invisible `LangInit`
+
+Como el átomo se instancia con `'en'`, necesitamos sincronizar con `localStorage` al cargar la página. Esto lo hace un island diminuto que no renderiza nada:
+
+```tsx
+import { useEffect } from 'react';
+import { setLang, type Lang } from '../stores/languageStore';
+
+export default function LangInit() {
+    useEffect(() => {
+        const saved = localStorage.getItem('lang') as Lang;
+        if (saved === 'en' || saved === 'es') {
+            setLang(saved);
+        }
+    }, []);
+
+    return null;
+}
+```
+
+En `index.astro`: `<LangInit client:load />`. Se hidrata inmediato, lee localStorage, y todos los demás islands (aunque vivan en árboles React separados) reaccionan al cambio porque usan el mismo átomo `$lang`.
 
 ### Flujo de datos
 
 ```
-PortfolioApp
-  └── <LanguageProvider>          ← almacena lang + t() en el contexto
-        ├── <Navbar>
-        │     └── useLanguage()  ← lee del contexto directamente
-        │     └── <LanguageDropdown>
-        │           └── useLanguage() → llama setLang()
-        ├── <Hero>
-        │     └── useLanguage()  ← obtiene t() y lang
-        ├── <AboutSection>
-        │     └── useLanguage()
-        └── ...etc
+src/stores/languageStore.ts
+  └── export const $lang = atom('en')   ← singleton a nivel módulo
+        ▲                ▲
+        │ useStore($lang)│ useStore($lang)   ← cada island lee el mismo átomo
+        │                │
+ ┌──────┴──────┐  ┌──────┴──────┐  ┌──────┴──────┐
+ │  Navbar     │  │  Hero       │  │  About...   │   ← islands INDEPENDIENTES
+ │  (island 1) │  │  (island 2) │  │  (island 3) │
+ └─────────────┘  └─────────────┘  └─────────────┘
+        ▲
+        │ click en "ES" → setLang('es')
+        │ $lang.set('es') → todos los subscribers re-renderizan
 ```
+
+> [!tip] Otras funciones de nanostores para explorar
+> - `persistentAtom` — reemplaza `LangInit.tsx` + localStorage con una sola línea
+> - `computed()` — átomos derivados (ej: `$isSpanish = computed($lang, l => l === 'es')`)
+> - `map()` — para estado estructurado en lugar de primitivos
+> - `task()` — para acciones asíncronas con tracking de loading
 
 ---
 
@@ -694,25 +748,35 @@ PortfolioApp
 
 ### Uso en el proyecto
 
-```tsx
-// Leer al montar (solo una vez, array vacío como dependencia)
-useEffect(() => {
-  const saved = localStorage.getItem("lang") as Lang;
-  if (saved === "en" || saved === "es") {
-    setLang(saved);
-  }
-}, []);
+El acceso a `localStorage` está centralizado en dos lugares:
 
-// Escribir cada vez que cambia el idioma
+```ts
+// src/stores/languageStore.ts — escritura
+export function setLang(lang: Lang): void {
+    $lang.set(lang);
+    if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('lang', lang);
+    }
+}
+```
+
+```tsx
+// src/components/LangInit.tsx — lectura única al cargar la página
 useEffect(() => {
-  localStorage.setItem("lang", lang);
-}, [lang]);
+    const saved = localStorage.getItem('lang') as Lang;
+    if (saved === 'en' || saved === 'es') {
+        setLang(saved);
+    }
+}, []);
 ```
 
 Resultado: si el usuario elige español, recarga la página y vuelve, sigue viendo el sitio en español.
 
 > [!warning] SSR y localStorage
-> `localStorage` solo existe en el navegador, no en Node.js (donde corre el servidor de Astro durante el build). Por eso el acceso está dentro de `useEffect`, que solo se ejecuta en el cliente después del render.
+> `localStorage` solo existe en el navegador, no en Node.js (donde corre el servidor de Astro durante el build). Por eso hay un guard `typeof localStorage !== 'undefined'` y el acceso inicial está dentro de `useEffect`, que solo se ejecuta en el cliente después del render.
+
+> [!tip] Mejora futura: `persistentAtom`
+> `@nanostores/persistent` sincroniza automáticamente el átomo con `localStorage` y elimina la necesidad de `LangInit.tsx`. Queda como TODO.
 
 ---
 
@@ -918,18 +982,87 @@ Los archivos de configuración usan extensión `.mjs` (o `type: "module"` en pac
   dist/          ← output compilado
 ```
 
-### Estado actual del repo
+### Estado actual del repo (Abril 2026)
 
-El proyecto tiene cambios en staging de una migración importante:
+Después del refactoring a Islands + nanostores + deploy en Vercel:
 
-- `astro.config.mjs`, `package.json`, `package-lock.json` → actualizados para Astro + React + Tailwind
-- `src/components/Hero.tsx`, `Navbar.tsx`, `PortfolioApp.tsx` → reescritos en React/TSX
-- `src/context/LanguageContext.tsx` → nuevo Context de i18n
-- `src/layouts/baseLayout.astro` → layout base de Astro
-- `src/pages/index.astro` → página raíz
-- `src/styles/globals.css` → nuevo sistema de estilos con Tailwind
-- `tailwind.config.mjs`, `postcss.config.mjs` → configuración del pipeline CSS
+- `astro.config.mjs`, `package.json`, `package-lock.json` → Astro 5 + React 19 + Tailwind 3 + nanostores + Vercel Speed Insights
+- `src/components/*.tsx` → cada sección es un island independiente
+- `src/stores/languageStore.ts` → átomo de nanostore para i18n (reemplaza Context)
+- `src/i18n/translations.ts` → single source of truth para textos EN/ES
+- `src/components/LangInit.tsx` → island invisible que sincroniza `localStorage` → store
+- `src/layouts/baseLayout.astro` → layout base con IntersectionObserver vanilla + Speed Insights
+- `src/pages/index.astro` → 9 islands con mix de `client:load` y `client:idle`
+- `src/styles/globals.css` → Tailwind + tokens CSS + animaciones
+- `src/context/LanguageContext.tsx` → **huérfano** (sin uso), candidato a borrar
 - `.tmp-figma/` → archivos de referencia de Figma (eliminados del tracking)
+
+### Branching
+
+- `main` → branch de producción; cada push dispara deploy automático en Vercel
+- `dev` → branch de trabajo; se mergea a `main` con fast-forward cuando está listo
+
+---
+
+## Vercel y Speed Insights
+
+### Vercel como hosting
+
+[Vercel](https://vercel.com) es una plataforma de hosting especializada en sitios front-end y edge functions. Para un proyecto Astro puro funciona perfecto porque:
+
+- CDN global con cacheo agresivo del HTML estático
+- Preview deploys por cada PR (URL única por branch)
+- HTTPS automático y gratuito
+- Build automático al hacer `git push origin main`
+
+No hay configuración específica de Astro — Vercel detecta el framework y corre `npm run build`, sirviendo `dist/` automáticamente.
+
+### `@vercel/speed-insights`
+
+Librería cliente que captura las **Core Web Vitals** reales de cada visitante y las envía al dashboard de Vercel. Instalación:
+
+```bash
+npm install @vercel/speed-insights
+```
+
+Uso en `baseLayout.astro`:
+
+```astro
+<script>
+  import { injectSpeedInsights } from "@vercel/speed-insights";
+  injectSpeedInsights();
+</script>
+```
+
+> [!note] Por qué no usamos el componente oficial
+> El paquete exporta un componente `SpeedInsights.astro` a través de un archivo `.ts` intermedio. El Astro Language Server no puede resolver esa cadena y marca un falso error. Usamos `injectSpeedInsights()` directamente — Vite bundlea el script igual y el comportamiento es idéntico.
+
+### Métricas que mide
+
+| Métrica  | Qué mide                                              | Bueno si |
+| -------- | ----------------------------------------------------- | -------- |
+| **LCP**  | Largest Contentful Paint: cuánto tarda el elemento más grande | < 2.5s |
+| **INP**  | Interaction to Next Paint: respuesta a clics/teclado  | < 200ms  |
+| **CLS**  | Cumulative Layout Shift: saltos de layout al cargar   | < 0.1    |
+| **FCP**  | First Contentful Paint: primer pixel visible          | < 1.8s   |
+| **TTFB** | Time to First Byte: velocidad del servidor            | < 800ms  |
+
+La métrica agregada es **RES (Real Experience Score)** de 0–100. Sobre 90 = experiencia "great".
+
+### Resultados actuales (primeras visitas)
+
+| Dispositivo | RES  | Nota                                             |
+| ----------- | ---- | ------------------------------------------------ |
+| Mobile      | 93   | Great. INP 336ms es el único punto mejorable.    |
+| Desktop     | 83   | Needs improvement. LCP 3s y INP 392ms a reducir. |
+
+### Cosas a mejorar
+
+1. **Reducir INP**: sustituir más `client:load` por `client:idle` donde la interactividad no sea crítica
+2. **Mejorar LCP**: convertir secciones estáticas a `.astro` puro (sin hidratación de React)
+3. **Precargar fuentes**: añadir `<link rel="preload" as="font">` para las fuentes de `<h1>` del hero
+4. **Optimizar imágenes**: usar `<Image />` de Astro con `format="avif"` + `loading="lazy"`
+5. **Content Collections**: mover los datos de proyectos de TSX a markdown (mejora DX y permite lazy-loading)
 
 ---
 
@@ -938,17 +1071,18 @@ El proyecto tiene cambios en staging de una migración importante:
 ### Pipeline completo: del código al navegador
 
 ```
-1. npm run dev / npm run build
+1. npm run dev / npm run build  (o git push → Vercel dispara build)
         │
         ▼
 2. Astro lee src/pages/index.astro
-        │  ↪ importa baseLayout.astro (layout HTML base)
-        │  ↪ importa PortfolioApp.tsx (componente React)
+        │  ↪ importa baseLayout.astro
+        │  ↪ importa cada island (LangInit, Navbar, Hero, ...Section)
         │
         ▼
 3. Astro procesa baseLayout.astro
         │  ↪ genera el <html>, <head>, <body>
         │  ↪ importa globals.css → pasa por PostCSS
+        │  ↪ bundlea los <script> inline (IntersectionObserver, SpeedInsights)
         │
         ▼
 4. PostCSS procesa globals.css
@@ -959,49 +1093,62 @@ El proyecto tiene cambios en staging de una migración importante:
         │  ↪ Resultado: un único CSS minificado
         │
         ▼
-5. Astro compila PortfolioApp.tsx y sus importaciones (React)
+5. Astro compila cada island por separado
         │  ↪ TypeScript transpila TSX → JavaScript
-        │  ↪ Genera un bundle JS mínimo para el "island"
+        │  ↪ Cada island produce SU PROPIO bundle (code-splitting)
+        │  ↪ nanostores queda en un chunk compartido
         │
         ▼
 6. Output en dist/
-        │  ↪ index.html (HTML estático con el markup inicial)
+        │  ↪ index.html (HTML estático con el markup inicial de los 9 islands)
         │  ↪ _astro/globals.css (CSS compilado)
-        │  ↪ _astro/PortfolioApp.js (bundle React)
+        │  ↪ _astro/Navbar.*.js, Hero.*.js, LangInit.*.js (client:load)
+        │  ↪ _astro/AboutSection.*.js, ...Section.*.js (client:idle)
+        │  ↪ _astro/languageStore.*.js (chunk compartido por todos)
+        │  ↪ _astro/client.*.js (runtime de React compartido)
         │
         ▼
-7. Navegador recibe y procesa
-        │  ↪ HTML renderiza la estructura (navbar, hero, secciones)
-        │  ↪ CSS aplica estilos y tema oscuro
-        │  ↪ React hidrata PortfolioApp (añade interactividad)
-        │  ↪ IntersectionObserver observa elementos para animaciones
-        │  ↪ LanguageContext lee localStorage y establece idioma
+7. Vercel sube dist/ a su CDN global
+        │  ↪ HTTPS + invalidación automática del caché
+        │
+        ▼
+8. Navegador recibe y procesa
+        │  ↪ HTML renderiza la estructura (navbar, hero, secciones) — LCP rápido
+        │  ↪ CSS aplica estilos y tema oscuro — FCP rápido
+        │  ↪ Scripts no-render (Speed Insights, IntersectionObserver) se cargan
+        │  ↪ React hidrata los islands con client:load (Navbar, Hero, LangInit)
+        │  ↪ LangInit lee localStorage y hace $lang.set(saved)
         │  ↪ Hero inicia el efecto de tipeo
         │  ↪ Navbar activa el scroll spy
+        │  ↪ En el próximo idle del browser → hidrata secciones client:idle
+        │  ↪ Speed Insights empieza a medir CWV y las envía a Vercel
 ```
 
-### Flujo de cambio de idioma
+### Flujo de cambio de idioma (con nanostores)
 
 ```
-Usuario hace clic en "ES" en el LanguageDropdown
+Usuario hace clic en "ES" en el LanguageDropdown (dentro del island Navbar)
         │
         ▼
-setLang("es")  ←  Context actualiza el estado
+setLang("es")
+        │  ↪ $lang.set('es')
+        │  ↪ localStorage.setItem('lang', 'es')
         │
         ▼
-useEffect([lang]) dispara localStorage.setItem("lang", "es")
+Nanostores notifica a todos los subscribers (useStore) — cruza los islands
+        │  ↪ island Navbar → links en español
+        │  ↪ island Hero → subtitle en español → reinicia el typeo
+        │  ↪ island AboutSection, ProjectsSection, ... → textos en español
         │
         ▼
-React re-renderiza todos los consumidores de useLanguage()
-        │  ↪ Navbar → links en español
-        │  ↪ Hero → subtitle en español → reinicia el typeo
-        │  ↪ Todas las secciones → textos en español
-        │
-        ▼
-Si el usuario recarga → useEffect([]) lee localStorage → setLang("es")
+Si el usuario recarga → LangInit useEffect([]) lee localStorage → setLang('es')
+        │  ↪ Esto ocurre DESPUÉS del SSR en inglés → hay un flash breve
+        │  ↪ Candidato a mejorar con persistentAtom o cookie-based SSR
 ```
 
 ---
 
 > [!success] Resumen ejecutivo
-> Este portfolio combina **Astro** (que entrega HTML estático ultra-rápido con mínimo JS) con **React** (para las partes interactivas como el navbar, el typeo y el i18n), escrito en **TypeScript** para seguridad de tipos. Los estilos usan **Tailwind** como capa de utilidades sobre un sistema de **CSS Custom Properties** que hace el theming oscuro trivial. **PostCSS + Autoprefixer** aseguran compatibilidad cross-browser. Todo el proyecto se lintea con **ESLint 9** y se gestiona con **npm** y **Git**.
+> Este portfolio combina **Astro 5** con arquitectura real de **Islands** (cada sección es un bundle JS separado) + **React 19** solo donde hace falta interactividad, escrito en **TypeScript**. El estado global de i18n usa **nanostores** en lugar de React Context para funcionar entre islands independientes. Los estilos usan **Tailwind 3** sobre un sistema de **CSS Custom Properties**. Las animaciones de scroll son **vanilla JS** fuera de React (`IntersectionObserver` directo en `baseLayout.astro`). Deploy automático en **Vercel** con **Speed Insights** midiendo Core Web Vitals reales. **PostCSS + Autoprefixer** aseguran compatibilidad cross-browser. Todo el proyecto se lintea con **ESLint 9** y se gestiona con **npm** y **Git**.
+>
+> La filosofía del proyecto es **"exploit the stack"**: priorizar la adopción de las características avanzadas de cada tecnología sobre la simplicidad. El resultado: ~3 KB de JS inicial en lugar del bundle de React completo, y Real Experience Score de 93 en mobile.

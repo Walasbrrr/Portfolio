@@ -61,36 +61,22 @@ export default function Navbar() {
                     className="brand-text"
                     href="#home"
                     onClick={closeMenu}
-                    style={{
-                        display: "inline-flex",
-                        alignItems: "center",
-                        justifyContent: "flex-start",
-                        paddingLeft: 0,
-                        flexShrink: 0,
-                    }}
                 >
                     <span className="grad" style={{ textShadow: "0 0 12px rgba(86,194,255,0.4)", letterSpacing: "1px" }}>
                         Walen I Calderon
                     </span>
                 </a>
 
-                <input
-                    type="checkbox"
-                    id="click"
-                    checked={isMenuOpen}
-                    onChange={e => setIsMenuOpen(e.target.checked)}
-                    hidden
-                    aria-label="Toggle Menu"
-                />
-
-                <label
-                    htmlFor="click"
+                <button
+                    type="button"
                     className={`menu-btn${isMenuOpen ? ' is-open' : ''}`}
+                    onClick={() => setIsMenuOpen(v => !v)}
                     aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-expanded={isMenuOpen}
+                    aria-controls="primary-navigation"
                 >
                     <i className={`fas ${isMenuOpen ? 'fa-times' : 'fa-bars'}`} aria-hidden="true"></i>
-                </label>
+                </button>
 
                 <ul id="primary-navigation" className={isMenuOpen ? 'is-open' : ''}>
 
