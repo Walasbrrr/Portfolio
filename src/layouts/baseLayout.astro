@@ -52,6 +52,12 @@ import "../styles/globals.css";
             <p>Copyright &copy; 2026 Walen I Calderon</p>
         </footer>
 
+        <!-- Vercel Speed Insights: Core Web Vitals en producción -->
+        <script type="module">
+            import { injectSpeedInsights } from '@vercel/speed-insights';
+            injectSpeedInsights();
+        </script>
+
         <!-- Animaciones de scroll: vanilla JS, cero overhead de React -->
         <script>
             const reduceMotion =
