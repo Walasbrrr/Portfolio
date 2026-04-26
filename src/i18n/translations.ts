@@ -158,4 +158,4 @@ export const translations = {
     heroStatsSatisfactionLabel: "Satisfacción",
     heroSpecialtiesLabel: "Especialidades",
   },
-} as const;
+} as const; 

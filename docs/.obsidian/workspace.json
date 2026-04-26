@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "stack-tecnico.md",
+                "file": "refactoring-islands-nanostores.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "stack-tecnico"
+              "title": "refactoring-islands-nanostores"
             }
           }
         ]
@@ -185,7 +185,7 @@
   },
   "active": "877e8d2cbd07a468",
   "lastOpenFiles": [
-    "refactoring-islands-nanostores.md",
-    "stack-tecnico.md"
+    "stack-tecnico.md",
+    "refactoring-islands-nanostores.md"
   ]
 }

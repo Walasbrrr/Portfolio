@@ -1094,3 +1094,7 @@
     }
   }
 }
+
+/* Scroll Reveal Animations */
+.reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+.reveal-up.active { opacity: 1; transform: translateY(0); }
