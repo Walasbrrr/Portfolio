@@ -3,11 +3,11 @@ import BaseLayout from "../layouts/baseLayout.astro";
 import LangInit      from "../components/LangInit";
 import Navbar        from "../components/Navbar";
 import Hero          from "../components/Hero";
-import AboutSection      from "../components/AboutSection";
+import AboutSection      from "../components/AboutSection.astro";
 import ProjectsSection   from "../components/ProjectsSection";
 import SkillsSection     from "../components/SkillsSection";
-import ExperienceSection from "../components/ExperienceSection";
-import EducationSection  from "../components/EducationSection";
+import ExperienceSection from "../components/ExperienceSection.astro";
+import EducationSection  from "../components/EducationSection.astro";
 import ContactSection    from "../components/ContactSection";
 ---
 
@@ -20,11 +20,11 @@ import ContactSection    from "../components/ContactSection";
   <Hero   client:load />
 
   <!-- Secciones: se hidratan cuando el browser está libre -->
-  <AboutSection      client:idle />
+  <AboutSection />
   <ProjectsSection   client:idle />
   <SkillsSection     client:idle />
-  <ExperienceSection client:idle />
-  <EducationSection  client:idle />
+  <ExperienceSection />
+  <EducationSection />
   <ContactSection    client:idle />
 
   <script>

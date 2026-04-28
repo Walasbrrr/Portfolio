@@ -1,0 +1,28 @@
+---
+import { translations } from "../i18n/translations";
+const t = (key: keyof typeof translations.en) => translations.en[key];
+---
+<section id="experience" class="section-block">
+    <div class="container">
+        <div class="section-head">
+            <h2 data-i18n="experience">{t("experience")}</h2>
+            <p class="muted" style="margin: 0" data-i18n="expHelp">{t("expHelp")}</p>
+        </div>
+        <div class="timeline" style="display: grid; gap: 14px">
+            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 12px">
+                <div class="tl-dot" style="width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; background: linear-gradient(180deg, var(--brand), var(--brand-strong)); box-shadow: 0 0 0 4px rgba(86,194,255,0.18)"></div>
+                <div class="tl-card card" style="padding: 14px">
+                    <strong>Student Developer</strong> <span class="muted">· 2024 – 2025</span>
+                    <p class="muted" style="margin: 8px 0 0" data-i18n="exp1">{t("exp1")}</p>
+                </div>
+            </div>
+            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 12px">
+                <div class="tl-dot" style="width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; background: linear-gradient(180deg, var(--brand), var(--brand-strong)); box-shadow: 0 0 0 4px rgba(86,194,255,0.18)"></div>
+                <div class="tl-card card" style="padding: 14px">
+                    <strong>Personal Projects</strong> <span class="muted">· 2023 – 2025</span>
+                    <p class="muted" style="margin: 8px 0 0" data-i18n="exp2">{t("exp2")}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

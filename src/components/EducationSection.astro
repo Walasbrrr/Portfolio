@@ -1,0 +1,25 @@
+---
+import { translations } from "../i18n/translations";
+const t = (key: keyof typeof translations.en) => translations.en[key];
+---
+<section id="education" class="section-block">
+    <div class="container">
+        <div class="section-head">
+            <h2 data-i18n="education">{t("education")}</h2>
+            <p class="muted" style="margin: 0" data-i18n="eduHelp">{t("eduHelp")}</p>
+        </div>
+        <div class="cards two-columns">
+            <article class="card">
+                <strong>Middlesex College</strong> <span class="muted">· A.S. Computer Science</span>
+                <p class="muted" style="margin: 8px 0 0" data-i18n="edu1">{t("edu1")}</p>
+            </article>
+            <article class="card">
+                <strong>Certificados / Cursos</strong>
+                <ul class="muted" style="margin: 8px 0 0; padding-left: 18px">
+                    <li data-i18n="cert1">{t("cert1")}</li>
+                    <li data-i18n="cert2">{t("cert2")}</li>
+                </ul>
+            </article>
+        </div>
+    </div>
+</section>

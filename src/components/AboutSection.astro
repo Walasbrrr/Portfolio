@@ -1,0 +1,24 @@
+---
+import { translations } from "../i18n/translations";
+const t = (key: keyof typeof translations.en) => translations.en[key];
+---
+<section id="about" class="section-block">
+    <div class="container">
+        <div class="section-head">
+            <h2 data-i18n="about">{t("about")}</h2>
+            <p data-i18n="aboutTag">{t("aboutTag")}</p>
+        </div>
+
+        <div class="cards two-columns">
+            <article class="card">
+                <h3 data-i18n="aboutJourneyTitle">{t("aboutJourneyTitle")}</h3>
+                <p data-i18n="aboutJourneyText">{t("aboutJourneyText")}</p>
+            </article>
+
+            <article class="card">
+                <h3 data-i18n="aboutGoalTitle">{t("aboutGoalTitle")}</h3>
+                <p data-i18n="aboutGoalText">{t("aboutGoalText")}</p>
+            </article>
+        </div>
+    </div>
+</section>

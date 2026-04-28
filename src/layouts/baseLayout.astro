@@ -98,5 +98,21 @@ import "../styles/globals.css";
                 }
             }
         </script>
+        <!-- Sistema global de i18n para componentes estáticos (.astro) -->
+        <script>
+            import { $lang } from '../stores/languageStore';
+            import { translations } from '../i18n/translations';
+
+            $lang.subscribe((currentLang) => {
+                const elements = document.querySelectorAll('[data-i18n]');
+                elements.forEach((el) => {
+                    const key = el.getAttribute('data-i18n');
+                    const dict = translations[currentLang as keyof typeof translations];
+                    if (key && dict[key as keyof typeof dict]) {
+                        el.textContent = dict[key as keyof typeof dict] as string;
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

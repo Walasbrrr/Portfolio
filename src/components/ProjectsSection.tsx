@@ -7,7 +7,7 @@ export default function ProjectSection() {
 
     const projects = [
         { id: 8, title: "Gestion Truck", tags: ["web", "java"], pill: "SaaS • Fullstack", descKey: "proj8", link: "#", image: "/images/gestion_truck.png", github: null, web: null },
-        { id: 7, title: "V y C Empresa", tags: ["web"], pill: "Web • Firebase", descKey: "proj7", link: "#", image: "/images/vyc_empresa.png", github: "https://github.com/Walasbrrr/V-y-C-empresa", web: "https://vyc-empresa.vercel.app" },
+        { id: 7, title: "V y C Empresa", tags: ["web"], pill: "Web • Firebase", descKey: "proj7", link: "#", image: "/images/vyc_empresa.png", github: "https://github.com/Walasbrrr/V-y-C-empresa", web: "https://vc-business-solutions.web.app" },
         { id: 1, title: "Hockey Manager", tags: ["java", "academic"], pill: "Java • CLI", descKey: "proj1", link: "https://github.com/Walasbrrr/University-Projects", image: "/images/hockey_manager.png", github: "https://github.com/Walasbrrr/University-Projects", web: null },
         { id: 4, title: "Gestor de tareas", tags: ["java"], pill: "Java • OOP", descKey: "proj4", link: "https://github.com/Walasbrrr/University-Projects", image: "/images/gestor_tareas.png", github: "https://github.com/Walasbrrr/University-Projects", web: null },
     ];
@@ -23,23 +23,23 @@ export default function ProjectSection() {
                 </div>
 
                 <div className="filters">
-                    <button 
-                        className={`tag-chip ${filter === "all" ? "active" : ""}`} 
+                    <button
+                        className={`tag-chip ${filter === "all" ? "active" : ""}`}
                         onClick={() => setFilter("all")}
                         aria-pressed={filter === "all"}
                     >{t("all")}</button>
-                    <button 
-                        className={`tag-chip ${filter === "java" ? "active" : ""}`} 
+                    <button
+                        className={`tag-chip ${filter === "java" ? "active" : ""}`}
                         onClick={() => setFilter("java")}
                         aria-pressed={filter === "java"}
                     >Java</button>
-                    <button 
-                        className={`tag-chip ${filter === "web" ? "active" : ""}`} 
+                    <button
+                        className={`tag-chip ${filter === "web" ? "active" : ""}`}
                         onClick={() => setFilter("web")}
                         aria-pressed={filter === "web"}
                     >Web</button>
-                    <button 
-                        className={`tag-chip ${filter === "academic" ? "active" : ""}`} 
+                    <button
+                        className={`tag-chip ${filter === "academic" ? "active" : ""}`}
                         onClick={() => setFilter("academic")}
                         aria-pressed={filter === "academic"}
                     >{t("academic")}</button>
@@ -84,7 +84,7 @@ export default function ProjectSection() {
                                         {proj.pill}
                                     </span>
                                 </div>
-                                
+
                                 <p className="text-[#9FB2CC] text-sm leading-relaxed mb-6 m-0 flex-grow">
                                     {t(proj.descKey)}
                                 </p>
