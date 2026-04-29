@@ -88,13 +88,18 @@ export default function Navbar() {
                         </a>
                     </li>
                     <li>
-                        <a className={`nav-link ${activeSection === "skills" ? "active" : ""}`} href="#skills" onClick={closeMenu}>
-                            {t("skills")}
+                        <a className={`nav-link ${activeSection === "about" ? "active" : ""}`} href="#about" onClick={closeMenu}>
+                            {t("about")}
                         </a>
                     </li>
                     <li>
                         <a className={`nav-link ${activeSection === "projects" ? "active" : ""}`} href="#projects" onClick={closeMenu}>
                             {t("projects")}
+                        </a>
+                    </li>
+                    <li>
+                        <a className={`nav-link ${activeSection === "skills" ? "active" : ""}`} href="#skills" onClick={closeMenu}>
+                            {t("skills")}
                         </a>
                     </li>
                     <li>

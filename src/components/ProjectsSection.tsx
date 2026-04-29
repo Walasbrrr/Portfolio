@@ -7,7 +7,7 @@ export default function ProjectSection() {
 
     const projects = [
         { id: 8, title: "Gestion Truck", tags: ["web", "java"], pill: "SaaS • Fullstack", descKey: "proj8", link: "#", image: "/images/gestion_truck.png", github: null, web: null },
-        { id: 7, title: "V y C Empresa", tags: ["web"], pill: "Web • Firebase", descKey: "proj7", link: "#", image: "/images/vyc_empresa.png", github: "https://github.com/Walasbrrr/V-y-C-empresa", web: "https://vc-business-solutions.web.app" },
+        { id: 7, title: "V y C Empresa", tags: ["web"], pill: "Web • Firebase", descKey: "proj7", link: "#", image: "/images/vyc_empresa.png", github: "https://github.com/Walasbrrr/vc-business-website", web: "https://vc-business-solutions.web.app" },
         { id: 1, title: "Hockey Manager", tags: ["java", "academic"], pill: "Java • CLI", descKey: "proj1", link: "https://github.com/Walasbrrr/University-Projects", image: "/images/hockey_manager.png", github: "https://github.com/Walasbrrr/University-Projects", web: null },
         { id: 4, title: "Gestor de tareas", tags: ["java"], pill: "Java • OOP", descKey: "proj4", link: "https://github.com/Walasbrrr/University-Projects", image: "/images/gestor_tareas.png", github: "https://github.com/Walasbrrr/University-Projects", web: null },
     ];
@@ -59,14 +59,14 @@ export default function ProjectSection() {
                                 {/* Overlay Icons on Hover */}
                                 <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
                                     {proj.web && (
-                                        <div className="w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20">
+                                        <a href={proj.web} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 pointer-events-auto hover:bg-black/60 hover:scale-110 transition-all duration-300">
                                             <i className="fas fa-external-link-alt text-lg"></i>
-                                        </div>
+                                        </a>
                                     )}
                                     {proj.github && (
-                                        <div className="w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20">
+                                        <a href={proj.github} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="w-12 h-12 bg-black/40 backdrop-blur-md rounded-full flex items-center justify-center text-white border border-white/20 pointer-events-auto hover:bg-black/60 hover:scale-110 transition-all duration-300">
                                             <i className="fab fa-github text-xl"></i>
-                                        </div>
+                                        </a>
                                     )}
                                 </div>
                             </div>
@@ -91,12 +91,12 @@ export default function ProjectSection() {
 
                                 <div className="mt-auto flex gap-6 pt-4 border-t border-[rgba(255,255,255,0.06)]">
                                     {proj.web && (
-                                        <a href={proj.web} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-[#9FB2CC] hover:text-[#56C2FF] transition-colors font-medium">
+                                        <a href={proj.web} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 text-sm text-[#9FB2CC] hover:text-[#56C2FF] transition-colors font-medium">
                                             <i className="fas fa-external-link-alt"></i> Web
                                         </a>
                                     )}
                                     {proj.github && (
-                                        <a href={proj.github} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm text-[#9FB2CC] hover:text-[#56C2FF] transition-colors font-medium">
+                                        <a href={proj.github} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()} className="flex items-center gap-2 text-sm text-[#9FB2CC] hover:text-[#56C2FF] transition-colors font-medium">
                                             <i className="fab fa-github"></i> GitHub
                                         </a>
                                     )}
