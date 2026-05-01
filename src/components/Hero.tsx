@@ -1,14 +1,26 @@
 import { useEffect, useMemo, useState } from "react";
 import { useLanguage } from "../stores/languageStore";
 
+const GITHUB_USER = "Walasbrrr";
+
+type RepoFetchState =
+    | { status: "loading" }
+    | { status: "ok"; count: number }
+    | { status: "error" };
+
+function publicRepoBarPercent(count: number): string {
+    const pct = Math.round((count / 40) * 100);
+    return `${Math.min(100, Math.max(16, pct))}%`;
+}
+
 export default function Hero() {
     const { t, lang } = useLanguage();
     const [typedSubtitle, setTypedSubtitle] = useState("");
+    const [repoState, setRepoState] = useState<RepoFetchState>({ status: "loading" });
 
     const subtitle = useMemo(() => t("subtitle"), [t]);
 
     useEffect(() => {
-        // Type once (non-looping). Respect reduced motion.
         const reduceMotion =
             typeof window !== "undefined" &&
             window.matchMedia &&
@@ -32,10 +44,40 @@ export default function Hero() {
         return () => window.clearInterval(id);
     }, [subtitle, lang]);
 
+    useEffect(() => {
+        const ac = new AbortController();
+        setRepoState({ status: "loading" });
+
+        fetch(`https://api.github.com/users/${GITHUB_USER}`, { signal: ac.signal })
+            .then((r) => {
+                if (!r.ok) throw new Error("github user");
+                return r.json() as Promise<{ public_repos?: number }>;
+            })
+            .then((data) => {
+                if (typeof data.public_repos !== "number") throw new Error("public_repos");
+                setRepoState({ status: "ok", count: data.public_repos });
+            })
+            .catch((e: unknown) => {
+                if (e instanceof DOMException && e.name === "AbortError") return;
+                setRepoState({ status: "error" });
+            });
+
+        return () => ac.abort();
+    }, []);
+
+    const repoDisplay =
+        repoState.status === "ok"
+            ? String(repoState.count)
+            : repoState.status === "loading"
+              ? "…"
+              : "—";
+
+    const barWidth =
+        repoState.status === "ok" ? publicRepoBarPercent(repoState.count) : "22%";
+
     return (
         <section id="home" className="home">
             <div className="container hero-layout hero-figma">
-
                 <div className="hero-copy card hero-panel">
                     <div className="hero-badge">
                         <i className="fas fa-sparkles" aria-hidden="true"></i>
@@ -50,15 +92,11 @@ export default function Hero() {
                     </p>
 
                     <h1>
-                        <span className="hero-pretitle">
-                            {lang === "es" ? "Hola, soy" : "Hi, I'm"}
-                        </span>
+                        <span className="hero-pretitle">{lang === "es" ? "Hola, soy" : "Hi, I'm"}</span>
                         <span className="hero-title animated-gradient">Walen Calderon</span>
                     </h1>
 
-                    <p className="hero-role">
-                        {t("heroRole")}
-                    </p>
+                    <p className="hero-role">{t("heroRole")}</p>
 
                     <div className="hero-actions hero-actions-figma">
                         <a className="cta-button primary" href="#projects">
@@ -72,7 +110,7 @@ export default function Hero() {
                     </div>
 
                     <div className="hero-social">
-                        <a className="social-btn" href="https://github.com/Walasbrrr" target="_blank" rel="noreferrer" aria-label="GitHub">
+                        <a className="social-btn" href={`https://github.com/${GITHUB_USER}`} target="_blank" rel="noreferrer" aria-label="GitHub">
                             <i className="fab fa-github" aria-hidden="true"></i>
                         </a>
                         <a className="social-btn" href="https://www.linkedin.com/in/walen-calderon-a017b42a4/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
@@ -85,25 +123,31 @@ export default function Hero() {
                 </div>
 
                 <aside className="card hero-panel hero-side hero-side-figma">
-                    <div className="stat-hero stat-hero-wide">
+                    <div
+                        className="stat-hero stat-hero-wide"
+                        title={lang === "es" ? "Total de repos públicos según la API de GitHub." : "Total public repositories from the GitHub API."}
+                        aria-busy={repoState.status === "loading"}
+                    >
                         <div className="stat-hero-top">
                             <div>
-                                <div className="stat-hero-label">{t("heroStatsProjectsDoneLabel")}</div>
-                                <div className="stat-hero-value">4</div>
+                                <div className="stat-hero-label">{t("heroStatsGithubReposLabel")}</div>
+                                <div className="stat-hero-value tabular-nums" aria-live="polite">
+                                    {repoDisplay}
+                                </div>
                             </div>
                             <div className="stat-hero-icon" aria-hidden="true">
-                                <i className="fas fa-sparkles"></i>
+                                <i className="fab fa-github"></i>
                             </div>
                         </div>
                         <div className="stat-hero-bar">
-                            <i style={{ width: "78%" }}></i>
+                            <i style={{ width: barWidth }}></i>
                         </div>
                     </div>
 
                     <div className="stat-hero-grid">
                         <div className="stat-hero">
-                            <div className="stat-hero-label">{t("heroStatsJourneyLabel")}</div>
-                            <div className="stat-hero-value stat-hero-value-text">{t("heroStatsJourneyValue")}</div>
+                            <div className="stat-hero-label">{t("heroStatsCodingYearsLabel")}</div>
+                            <div className="stat-hero-value tabular-nums">{t("heroStatsCodingYearsValue")}</div>
                         </div>
                         <div className="stat-hero">
                             <div className="stat-hero-label">{t("heroStatsSatisfactionLabel")}</div>
@@ -122,7 +166,6 @@ export default function Hero() {
                         </div>
                     </div>
                 </aside>
-
             </div>
         </section>
     );
