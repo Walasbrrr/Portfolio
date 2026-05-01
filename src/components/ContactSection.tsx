@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { useLanguage } from "../stores/languageStore";
 
+const SUBMIT_TIMEOUT_MS = 18_000;
+
 export default function ContactSection() {
     const { t } = useLanguage();
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -11,14 +13,16 @@ export default function ContactSection() {
 
         const form = e.currentTarget;
         const formData = new FormData(form);
-
-        // Required Web3Forms key - El usuario debe reemplazar esto luego
         formData.append("access_key", "e9d3c117-6b46-4a5b-9ecd-f36d1e84792e");
+
+        const ac = new AbortController();
+        const tId = window.setTimeout(() => ac.abort(), SUBMIT_TIMEOUT_MS);
 
         try {
             const response = await fetch("https://api.web3forms.com/submit", {
                 method: "POST",
-                body: formData
+                body: formData,
+                signal: ac.signal,
             });
 
             if (response.ok) {
@@ -29,6 +33,8 @@ export default function ContactSection() {
             }
         } catch {
             setStatus("error");
+        } finally {
+            window.clearTimeout(tId);
         }
     };
 
@@ -41,29 +47,39 @@ export default function ContactSection() {
                 </div>
 
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
-                    {/* Left Column: Info */}
                     <div className="flex flex-col gap-6 p-8 rounded-3xl bg-gradient-to-b from-[rgba(14,30,52,0.82)] to-[rgba(8,18,32,0.72)] border border-[rgba(154,201,255,0.16)] shadow-[0_24px_60px_rgba(0,0,0,0.32)]">
                         <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white m-0">
                             {t("contactText")}
                         </h3>
-                        <p className="text-[#9FB2CC] m-0 leading-relaxed text-lg">
-                            {t("contactMessage")}
-                        </p>
+                        <p className="text-[#9FB2CC] m-0 leading-relaxed text-lg">{t("contactMessage")}</p>
 
                         <div className="flex flex-col gap-5 mt-auto pt-6 border-t border-[rgba(255,255,255,0.06)]">
-                            <a href="mailto:walenculd@gmail.com" className="flex items-center gap-4 text-[#EAF2FF] hover:text-[#56C2FF] transition-colors group w-fit font-medium">
+                            <a
+                                href="mailto:walenculd@gmail.com"
+                                className="flex items-center gap-4 text-[#EAF2FF] hover:text-[#56C2FF] transition-colors group w-fit font-medium"
+                            >
                                 <div className="w-12 h-12 rounded-full bg-[rgba(255,255,255,0.04)] flex items-center justify-center border border-[rgba(255,255,255,0.08)] group-hover:bg-[rgba(86,194,255,0.1)] group-hover:border-[rgba(86,194,255,0.3)] transition-all">
                                     <i className="fas fa-envelope text-lg"></i>
                                 </div>
                                 walenculd@gmail.com
                             </a>
-                            <a href="https://github.com/Walasbrrr" target="_blank" rel="noreferrer" className="flex items-center gap-4 text-[#EAF2FF] hover:text-[#56C2FF] transition-colors group w-fit font-medium">
+                            <a
+                                href="https://github.com/Walasbrrr"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex items-center gap-4 text-[#EAF2FF] hover:text-[#56C2FF] transition-colors group w-fit font-medium"
+                            >
                                 <div className="w-12 h-12 rounded-full bg-[rgba(255,255,255,0.04)] flex items-center justify-center border border-[rgba(255,255,255,0.08)] group-hover:bg-[rgba(86,194,255,0.1)] group-hover:border-[rgba(86,194,255,0.3)] transition-all">
                                     <i className="fab fa-github text-lg"></i>
                                 </div>
                                 GitHub
                             </a>
-                            <a href="https://www.linkedin.com/in/walen-calderon-a017b42a4/" target="_blank" rel="noreferrer" className="flex items-center gap-4 text-[#EAF2FF] hover:text-[#56C2FF] transition-colors group w-fit font-medium">
+                            <a
+                                href="https://www.linkedin.com/in/walen-calderon-a017b42a4/"
+                                target="_blank"
+                                rel="noreferrer"
+                                className="flex items-center gap-4 text-[#EAF2FF] hover:text-[#56C2FF] transition-colors group w-fit font-medium"
+                            >
                                 <div className="w-12 h-12 rounded-full bg-[rgba(255,255,255,0.04)] flex items-center justify-center border border-[rgba(255,255,255,0.08)] group-hover:bg-[rgba(86,194,255,0.1)] group-hover:border-[rgba(86,194,255,0.3)] transition-all">
                                     <i className="fab fa-linkedin-in text-lg"></i>
                                 </div>
@@ -72,55 +88,102 @@ export default function ContactSection() {
                         </div>
                     </div>
 
-                    {/* Right Column: Form */}
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-5 p-8 rounded-3xl bg-gradient-to-b from-[rgba(14,30,52,0.82)] to-[rgba(8,18,32,0.72)] border border-[rgba(154,201,255,0.16)] shadow-[0_24px_60px_rgba(0,0,0,0.32)]">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="flex flex-col gap-5 p-8 rounded-3xl bg-gradient-to-b from-[rgba(14,30,52,0.82)] to-[rgba(8,18,32,0.72)] border border-[rgba(154,201,255,0.16)] shadow-[0_24px_60px_rgba(0,0,0,0.32)]"
+                    >
+                        <input
+                            type="text"
+                            name="botcheck"
+                            tabIndex={-1}
+                            autoComplete="off"
+                            aria-hidden="true"
+                            className="sr-only"
+                            defaultValue=""
+                        />
+
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="name" className="text-sm font-semibold text-[#9FB2CC] uppercase tracking-wider">{t("formName")}</label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                required 
+                            <label
+                                htmlFor="name"
+                                className="text-sm font-semibold text-[#9FB2CC] uppercase tracking-wider"
+                            >
+                                {t("formName")}
+                            </label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                required
+                                maxLength={120}
                                 placeholder={t("formNamePlaceholder")}
                                 className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-[rgba(255,255,255,0.2)] focus:outline-none focus:border-[#56C2FF] focus:ring-1 focus:ring-[#56C2FF] transition-all"
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="email" className="text-sm font-semibold text-[#9FB2CC] uppercase tracking-wider">{t("formEmail")}</label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                required 
+                            <label
+                                htmlFor="email"
+                                className="text-sm font-semibold text-[#9FB2CC] uppercase tracking-wider"
+                            >
+                                {t("formEmail")}
+                            </label>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                required
+                                maxLength={254}
                                 placeholder={t("formEmailPlaceholder")}
+                                pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
                                 className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-[rgba(255,255,255,0.2)] focus:outline-none focus:border-[#56C2FF] focus:ring-1 focus:ring-[#56C2FF] transition-all"
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="message" className="text-sm font-semibold text-[#9FB2CC] uppercase tracking-wider">{t("formMessage")}</label>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                required 
+                            <label
+                                htmlFor="message"
+                                className="text-sm font-semibold text-[#9FB2CC] uppercase tracking-wider"
+                            >
+                                {t("formMessage")}
+                            </label>
+                            <textarea
+                                id="message"
+                                name="message"
+                                required
                                 rows={4}
+                                maxLength={4000}
                                 placeholder={t("formMessagePlaceholder")}
                                 className="w-full bg-[rgba(255,255,255,0.03)] border border-[rgba(255,255,255,0.08)] rounded-xl px-4 py-3.5 text-white placeholder-[rgba(255,255,255,0.2)] focus:outline-none focus:border-[#56C2FF] focus:ring-1 focus:ring-[#56C2FF] transition-all resize-none"
                             ></textarea>
                         </div>
 
-                        <button 
-                            type="submit" 
+                        <button
+                            type="submit"
                             disabled={status === "submitting" || status === "success"}
                             className="mt-2 w-full py-4 rounded-xl bg-gradient-to-r from-[#56C2FF] to-[#7EA0FF] text-[#04101d] font-bold text-base hover:shadow-[0_8px_24px_rgba(86,194,255,0.4)] hover:scale-[1.02] transition-all disabled:opacity-50 disabled:hover:scale-100 disabled:hover:shadow-none flex items-center justify-center gap-2"
                         >
-                            {status === "idle" && <><i className="fas fa-paper-plane"></i> {t("formSubmit")}</>}
-                            {status === "submitting" && <><i className="fas fa-spinner fa-spin"></i> {t("formSubmitting")}</>}
-                            {status === "success" && <><i className="fas fa-check"></i> {t("formSuccess")}</>}
-                            {status === "error" && <><i className="fas fa-exclamation-triangle"></i> {t("formError")}</>}
+                            {status === "idle" && (
+                                <>
+                                    <i className="fas fa-paper-plane"></i> {t("formSubmit")}
+                                </>
+                            )}
+                            {status === "submitting" && (
+                                <>
+                                    <i className="fas fa-spinner fa-spin"></i> {t("formSubmitting")}
+                                </>
+                            )}
+                            {status === "success" && (
+                                <>
+                                    <i className="fas fa-check"></i> {t("formSuccess")}
+                                </>
+                            )}
+                            {status === "error" && (
+                                <>
+                                    <i className="fas fa-exclamation-triangle"></i> {t("formError")}
+                                </>
+                            )}
                         </button>
-                        
+
                         {status === "success" && (
                             <p className="text-sm text-green-400 text-center m-0">{t("contactSuccessMsg")}</p>
                         )}

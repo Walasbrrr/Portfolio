@@ -26,26 +26,4 @@ import ContactSection    from "../components/ContactSection";
   <ExperienceSection />
   <EducationSection />
   <ContactSection    client:idle />
-
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('active');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, {
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
-      });
-
-      const sections = document.querySelectorAll('section');
-      sections.forEach(sec => {
-        sec.classList.add('reveal-up');
-        observer.observe(sec);
-      });
-    });
-  </script>
 </BaseLayout>

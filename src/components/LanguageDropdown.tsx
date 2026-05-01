@@ -13,16 +13,15 @@ export default function LanguageDropdown() {
         setIsOpen(false);
     };
 
-    // Cierra el dropdown al hacer click fuera
     useEffect(() => {
         if (!isOpen) return;
-        const handler = (e: MouseEvent) => {
+        const handler = (e: PointerEvent) => {
             if (ref.current && !ref.current.contains(e.target as Node)) {
                 setIsOpen(false);
             }
         };
-        document.addEventListener('mousedown', handler);
-        return () => document.removeEventListener('mousedown', handler);
+        document.addEventListener("pointerdown", handler);
+        return () => document.removeEventListener("pointerdown", handler);
     }, [isOpen]);
 
     return (

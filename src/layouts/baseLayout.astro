@@ -103,7 +103,8 @@ import "../styles/globals.css";
             import { $lang } from '../stores/languageStore';
             import { translations } from '../i18n/translations';
 
-            $lang.subscribe((currentLang) => {
+            const applyI18n = (currentLang) => {
+                document.documentElement.lang = currentLang;
                 const elements = document.querySelectorAll('[data-i18n]');
                 elements.forEach((el) => {
                     const key = el.getAttribute('data-i18n');
@@ -112,7 +113,10 @@ import "../styles/globals.css";
                         el.textContent = dict[key as keyof typeof dict] as string;
                     }
                 });
-            });
+            };
+
+            applyI18n($lang.get());
+            $lang.subscribe(applyI18n);
         </script>
     </body>
 </html>

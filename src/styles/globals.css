@@ -207,15 +207,12 @@
     text-transform: uppercase;
     display: inline-flex;
     align-items: center;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.15;
   }
 
   .brand-text > span {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: inline;
   }
 
   nav ul {
@@ -665,7 +662,6 @@
     margin-top: 0;
   }
 
-  .hero-description,
   .section-head p,
   .project-card p,
   .contact-card p,
@@ -758,28 +754,6 @@
     font-size: 0.9rem;
   }
 
-  .stat-list {
-    display: grid;
-    gap: 0.85rem;
-  }
-
-  .stat-item {
-    padding: 1rem 1.1rem;
-    border-radius: 18px;
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-  }
-
-  .stat-item strong {
-    display: block;
-    font-size: 1.3rem;
-    margin-bottom: 0.35rem;
-  }
-
-  .stat-item span {
-    color: var(--muted);
-  }
-
   /* Generic sections */
   .section-block {
     padding: 1.4rem 0 2rem;
@@ -849,17 +823,6 @@
     max-width: 34ch;
   }
 
-  .project-card-actions {
-    margin-top: auto;
-    padding-top: 1rem;
-  }
-
-  .project-card-cta {
-    padding: 0.5rem 1rem;
-    min-width: auto;
-    font-size: 0.9rem;
-  }
-
   @media (max-width: 1100px) {
     .project-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -886,6 +849,32 @@
     border-radius: inherit;
     background: linear-gradient(90deg, var(--brand), var(--brand-strong));
     box-shadow: 0 0 18px var(--glow);
+  }
+
+  @keyframes skill-bar-grow {
+    from {
+      width: 0%;
+    }
+    to {
+      width: var(--skill-bar-target, 0%);
+    }
+  }
+
+  .skill-bar-fill {
+    display: block;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--brand), var(--brand-strong));
+    box-shadow: 0 0 18px var(--glow);
+    width: 0%;
+    animation: skill-bar-grow 1.2s ease-out forwards;
+    animation-delay: var(--skill-bar-delay, 0s);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skill-bar-fill {
+      animation: none;
+      width: var(--skill-bar-target, 0%) !important;
+    }
   }
 
   .tag-list {
@@ -957,8 +946,10 @@
     }
 
     .brand-text {
-      flex: 1 1 0;
-      min-width: 0;
+      flex: 0 1 auto;
+      max-width: min(20rem, calc(100vw - 3.75rem - 46px));
+      white-space: normal;
+      word-break: break-word;
     }
 
     /* ── Botón hamburguesa ── */
@@ -1102,7 +1093,3 @@
     }
   }
 }
-
-/* Scroll Reveal Animations */
-.reveal-up { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
-.reveal-up.active { opacity: 1; transform: translateY(0); }

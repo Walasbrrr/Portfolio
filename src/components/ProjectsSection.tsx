@@ -40,7 +40,6 @@ function ProjectCard({ proj, t }: { proj: Project; t: (key: string) => string })
                             href={proj.web}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
                             className={iconBtnBase}
                             aria-label={`${proj.title} — live site`}
                         >
@@ -52,7 +51,6 @@ function ProjectCard({ proj, t }: { proj: Project; t: (key: string) => string })
                             href={proj.github}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
                             className={iconBtnBase}
                             aria-label={`${proj.title} — GitHub`}
                         >
@@ -104,7 +102,6 @@ function ProjectCard({ proj, t }: { proj: Project; t: (key: string) => string })
                             href={proj.web}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
                             className="flex items-center gap-2 text-sm text-[#9FB2CC] hover:text-[#56C2FF] transition-colors font-medium"
                         >
                             <i className="fas fa-external-link-alt" /> Web
@@ -115,7 +112,6 @@ function ProjectCard({ proj, t }: { proj: Project; t: (key: string) => string })
                             href={proj.github}
                             target="_blank"
                             rel="noreferrer"
-                            onClick={(e) => e.stopPropagation()}
                             className="flex items-center gap-2 text-sm text-[#9FB2CC] hover:text-[#56C2FF] transition-colors font-medium"
                         >
                             <i className="fab fa-github" /> GitHub
