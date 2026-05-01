@@ -507,12 +507,11 @@
     margin-bottom: 0.35rem;
   }
 
-  .stat-hero-value {
-    font-family: var(--font-heading);
-    font-weight: 700;
-    font-size: 1.6rem;
-    color: var(--foreground);
-    letter-spacing: -0.01em;
+  .stat-hero-value-text {
+    font-size: 1.05rem;
+    font-weight: 600;
+    line-height: 1.25;
+    letter-spacing: normal;
   }
 
   .stat-hero-top {

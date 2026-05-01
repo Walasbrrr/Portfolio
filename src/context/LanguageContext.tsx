@@ -85,6 +85,8 @@ export const translations = {
     heroCtaDownloadCv: "Download CV",
     heroStatsProjectsDoneLabel: "Projects completed",
     heroStatsYearsLabel: "Years of experience",
+    heroStatsJourneyLabel: "Path",
+    heroStatsJourneyValue: "Always learning",
     heroStatsSatisfactionLabel: "Satisfaction",
     heroSpecialtiesLabel: "Specialties"
   },
@@ -169,6 +171,8 @@ export const translations = {
     heroCtaDownloadCv: "Descargar CV",
     heroStatsProjectsDoneLabel: "Proyectos completados",
     heroStatsYearsLabel: "Años de experiencia",
+    heroStatsJourneyLabel: "Camino",
+    heroStatsJourneyValue: "Siempre aprendiendo",
     heroStatsSatisfactionLabel: "Satisfacción",
     heroSpecialtiesLabel: "Especialidades"
   }

@@ -89,7 +89,7 @@ export default function Hero() {
                         <div className="stat-hero-top">
                             <div>
                                 <div className="stat-hero-label">{t("heroStatsProjectsDoneLabel")}</div>
-                                <div className="stat-hero-value">13+</div>
+                                <div className="stat-hero-value">4</div>
                             </div>
                             <div className="stat-hero-icon" aria-hidden="true">
                                 <i className="fas fa-sparkles"></i>
@@ -102,8 +102,8 @@ export default function Hero() {
 
                     <div className="stat-hero-grid">
                         <div className="stat-hero">
-                            <div className="stat-hero-label">{t("heroStatsYearsLabel")}</div>
-                            <div className="stat-hero-value">8+</div>
+                            <div className="stat-hero-label">{t("heroStatsJourneyLabel")}</div>
+                            <div className="stat-hero-value stat-hero-value-text">{t("heroStatsJourneyValue")}</div>
                         </div>
                         <div className="stat-hero">
                             <div className="stat-hero-label">{t("heroStatsSatisfactionLabel")}</div>
