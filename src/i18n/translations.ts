@@ -19,6 +19,19 @@ export const translations = {
     projectsTag: "A few things I'm building and refining as part of my learning process.",
     projectReadMore: "Read more",
     projectShowLess: "Show less",
+    projectComingSoon: "Coming soon — links will be added when the project is public.",
+    projectOpenNewTab: "Opens in a new tab",
+    projectClickToExpand: "Click to expand",
+    projectClickToCollapse: "Click to collapse",
+    projectExpandHint: "Expand",
+    projectLabelProblem: "Problem",
+    projectLabelFull: "Overview",
+    projectLabelRole: "My role",
+    projectLabelTech: "Technologies",
+    projectLabelFeatures: "Highlights",
+    projectLiveDemo: "Live demo",
+    projectGitHub: "GitHub",
+    projectViewDetails: "View details",
     skillsTag: "Tools and technologies I currently work with.",
     skillTechTitle: "Technical skills",
     skillSoftTitle: "Strengths",
@@ -34,9 +47,33 @@ export const translations = {
     all: "All",
     academic: "Academic",
     proj1: "Console app for teams and stats (parsing, FileWriter, Scanner).",
+    proj1_preview: "Java CLI to manage teams, rosters, and game statistics from the terminal.",
+    proj1_problem:
+      "Practice real-world file I/O, parsing, and structured data without building a GUI yet.",
+    proj1_role: "Solo developer: requirements, implementation, and manual testing.",
+    proj1_features:
+      "Team roster handling|Read/write persistence with FileWriter|Scanner-driven console UX",
     proj4: "Console app to create, edit and list tasks (OOP, files).",
+    proj4_preview: "Terminal task manager built with Java OOP and file-backed storage.",
+    proj4_problem:
+      "Model tasks cleanly with objects and persist them reliably between sessions.",
+    proj4_role: "Solo developer for design, coding, and validation.",
+    proj4_features:
+      "Create, edit, and list tasks|Encapsulated domain model|Save/load state to files",
     proj7: "Business website with Firebase integration for data management.",
+    proj7_preview: "Company website wired to Firebase for manageable content and data.",
+    proj7_problem:
+      "Deliver a fast, professional web presence with a lightweight backend for updates.",
+    proj7_role: "Full-stack: layout, components, Firebase integration, and deploy.",
+    proj7_features:
+      "Responsive marketing pages|Firebase for data|Optimized for production hosting",
     proj8: "Fullstack SaaS application for managing truck fleets and logistics.",
+    proj8_preview: "Fleet & logistics workflow inspired by modern SaaS dashboards.",
+    proj8_problem:
+      "Explore end-to-end product thinking: auth, data modeling, and operator-facing UI.",
+    proj8_role: "Full-stack across API, persistence, and client experience.",
+    proj8_features:
+      "Structured domain modules|Secure patterns|Dashboard-oriented workflows",
     experience: "Experience",
     expHelp: "Relevant projects and roles.",
     exp1: "Academic Java projects (CLI), small web apps and Git practice.",
@@ -49,7 +86,7 @@ export const translations = {
     downloadCV: "Download CV",
     heroBadge: "Available for new projects",
     heroRole:
-      "Full Stack Developer passionate about building delightful web experiences. Specialized in React, TypeScript and UI/UX.",
+      "Computer Science student passionate about building Java and web projects. Specialized in Java, HTML, CSS, JavaScript and Git.",
     heroCtaViewProjects: "View projects",
     heroCtaDownloadCv: "Download CV",
     heroStatsGithubReposLabel: "Public GitHub repos",
@@ -93,6 +130,20 @@ export const translations = {
     projectsTag: "Algunas cosas que estoy construyendo y mejorando como parte de mi proceso de aprendizaje.",
     projectReadMore: "Leer más",
     projectShowLess: "Ver menos",
+    projectComingSoon:
+      "Próximamente — enlaces cuando el proyecto sea público.",
+    projectOpenNewTab: "Se abre en una pestaña nueva",
+    projectClickToExpand: "Clic para expandir",
+    projectClickToCollapse: "Clic para contraer",
+    projectExpandHint: "Expandir",
+    projectLabelProblem: "Problema",
+    projectLabelFull: "Resumen",
+    projectLabelRole: "Mi rol",
+    projectLabelTech: "Tecnologías",
+    projectLabelFeatures: "Destacados",
+    projectLiveDemo: "Demo en vivo",
+    projectGitHub: "GitHub",
+    projectViewDetails: "Ver detalles",
     skillsTag: "Herramientas y tecnologías con las que trabajo actualmente.",
     skillTechTitle: "Habilidades técnicas",
     skillSoftTitle: "Fortalezas",
@@ -108,9 +159,33 @@ export const translations = {
     all: "Todos",
     academic: "Académicos",
     proj1: "App de consola para equipos y estadísticas (parsing, FileWriter, Scanner).",
+    proj1_preview: "CLI en Java para gestionar equipos, plantillas y estadísticas desde consola.",
+    proj1_problem:
+      "Practicar E/S de archivos, parsing y datos estructurados sin interfaz gráfica.",
+    proj1_role: "Desarrollador único: requisitos, implementación y pruebas manuales.",
+    proj1_features:
+      "Gestión de plantillas|Persistencia con FileWriter|UX por consola con Scanner",
     proj4: "Aplicación de consola para crear, editar y listar tareas (POO, archivos).",
+    proj4_preview: "Gestor de tareas en terminal con POO y almacenamiento en archivos.",
+    proj4_problem:
+      "Modelar tareas con objetos y guardar el estado entre sesiones de forma fiable.",
+    proj4_role: "Desarrollador único en diseño, código y validación.",
+    proj4_features:
+      "Crear, editar y listar tareas|Modelo encapsulado|Guardar/cargar estado en archivos",
     proj7: "Sitio web empresarial con integración de Firebase para la gestión de datos.",
+    proj7_preview: "Web corporativa con Firebase para contenidos y datos gestionables.",
+    proj7_problem:
+      "Ofrecer presencia web profesional con un backend ligero para actualizaciones.",
+    proj7_role: "Full-stack: maquetación, Firebase y despliegue.",
+    proj7_features:
+      "Páginas responsive|Integración Firebase|Listo para hosting productivo",
     proj8: "Aplicación SaaS Fullstack para la gestión de flotas de camiones y logística.",
+    proj8_preview: "Flujo tipo SaaS para flotas y logística con enfoque de dashboard.",
+    proj8_problem:
+      "Explorar producto end-to-end: auth, modelo de datos y UI para operadores.",
+    proj8_role: "Full-stack en API, persistencia y experiencia de cliente.",
+    proj8_features:
+      "Módulos de dominio estructurados|Patrones de seguridad|Vistas tipo panel",
     experience: "Experiencia",
     expHelp: "Proyectos y roles relevantes.",
     exp1: "Proyectos académicos en Java (CLI), apps web pequeñas y prácticas de Git.",
@@ -123,7 +198,7 @@ export const translations = {
     downloadCV: "Descargar CV",
     heroBadge: "Disponible para nuevos proyectos",
     heroRole:
-      "Desarrollador Full Stack apasionado por crear experiencias web increíbles. Especializado en React, TypeScript y diseño UI/UX.",
+      "Estudiante de Ciencias de la Computación apasionado por crear proyectos en Java y web. Especializado en Java, HTML, CSS, JavaScript y Git.",
     heroCtaViewProjects: "Ver proyectos",
     heroCtaDownloadCv: "Descargar CV",
     heroStatsGithubReposLabel: "Repos públicos (GitHub)",
