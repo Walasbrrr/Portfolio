@@ -7,7 +7,9 @@ export const translations = {
     projects: "Projects",
     skills: "Skills",
     contact: "Contact",
-    title: "Portfolio Walen I Calderon",
+    title: "Walen I Calderón | Portfolio — developer & CS student",
+    metaDescription:
+      "Portfolio of Walen I Calderón — Computer Science student focused on Java and web development. Projects, skills, experience, and contact.",
     subtitle: "Computer Science student seeking internships",
     aboutTag: "Learning by building, improving, and staying curious.",
     aboutJourneyTitle: "My journey",
@@ -110,6 +112,10 @@ export const translations = {
     contactSuccessMsg: "Thanks for reaching out! I'll get back to you soon.",
     contactErrorMsg:
       "There was a problem. Please check the console or try emailing me directly.",
+    footerCopyright: "© 2026 Walen I Calderón. All rights reserved.",
+    navMenuOpen: "Open menu",
+    navMenuClose: "Close menu",
+    langSelectAriaLabel: "Select language",
   },
 
   es: {
@@ -118,7 +124,9 @@ export const translations = {
     projects: "Proyectos",
     skills: "Habilidades",
     contact: "Contacto",
-    title: "Portfolio Walen I Calderon",
+    title: "Walen I Calderón | Portfolio — desarrollador y estudiante de CC",
+    metaDescription:
+      "Portfolio de Walen I Calderón — estudiante de Ciencias de la Computación enfocado en Java y desarrollo web. Proyectos, habilidades, experiencia y contacto.",
     subtitle: "Estudiante de Ciencias de la Computación en busca de internships",
     aboutTag: "Aprendiendo al construir, mejorar y mantener la curiosidad.",
     aboutJourneyTitle: "Mi camino",
@@ -222,5 +230,9 @@ export const translations = {
     contactSuccessMsg: "¡Gracias por escribirme! Me pondré en contacto contigo pronto.",
     contactErrorMsg:
       "Hubo un problema. Por favor revisa la consola o intenta directamente a mi correo.",
+    footerCopyright: "© 2026 Walen I Calderón. Todos los derechos reservados.",
+    navMenuOpen: "Abrir menú",
+    navMenuClose: "Cerrar menú",
+    langSelectAriaLabel: "Seleccionar idioma",
   },
 } as const;

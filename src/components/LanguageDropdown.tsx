@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../stores/languageStore';
 
 export default function LanguageDropdown() {
-    const { lang, setLang } = useLanguage();
+    const { lang, setLang, t } = useLanguage();
     const [isOpen, setIsOpen] = useState(false);
     const ref = useRef<HTMLLIElement>(null);
 
@@ -38,7 +38,7 @@ export default function LanguageDropdown() {
                 <i className="fas fa-caret-down lang-caret" aria-hidden="true"></i>
             </button>
 
-            <ul className="lang-menu" role="listbox" aria-label="Select language">
+            <ul className="lang-menu" role="listbox" aria-label={t("langSelectAriaLabel")}>
                 <li>
                     <button
                         onClick={() => handleSelect('es')}

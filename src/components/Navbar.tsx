@@ -75,7 +75,7 @@ export default function Navbar() {
                     type="button"
                     className={`menu-btn${isMenuOpen ? " is-open" : ""}`}
                     onClick={() => setIsMenuOpen((v) => !v)}
-                    aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+                    aria-label={isMenuOpen ? t("navMenuClose") : t("navMenuOpen")}
                     aria-expanded={isMenuOpen}
                     aria-controls="primary-navigation"
                 >
