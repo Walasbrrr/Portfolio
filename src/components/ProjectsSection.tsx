@@ -235,7 +235,7 @@ export default function ProjectSection() {
             id: 8,
             title: "Gestion Truck",
             tags: ["web", "java"],
-            stack: ["Java", "Spring", "React", "TypeScript"],
+            stack: ["Java", "Spring Boot", "PostgreSQL", "React", "TypeScript", "Docker"],
             pill: "SaaS • Fullstack",
             image: "/images/gestion_truck.png",
             github: null,
