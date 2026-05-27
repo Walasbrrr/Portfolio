@@ -215,11 +215,11 @@ export default function Hero() {
                     <div className="stat-hero stat-hero-wide">
                         <div className="stat-hero-label">{t("heroSpecialtiesLabel")}</div>
                         <div className="hero-chips">
+                            <span className="chip">Java</span>
+                            <span className="chip">Spring Boot</span>
                             <span className="chip">React</span>
-                            <span className="chip">TypeScript</span>
-                            <span className="chip">Node.js</span>
-                            <span className="chip">UI/UX</span>
-                            <span className="chip">APIs</span>
+                            <span className="chip">PostgreSQL</span>
+                            <span className="chip">Docker</span>
                         </div>
                     </div>
                 </aside>

@@ -14,11 +14,8 @@ const t = (key: keyof typeof translations.en) => translations.en[key];
                 <p class="muted" style="margin: 8px 0 0" data-i18n="edu1">{t("edu1")}</p>
             </article>
             <article class="card">
-                <strong>Certificados / Cursos</strong>
-                <ul class="muted" style="margin: 8px 0 0; padding-left: 18px">
-                    <li data-i18n="cert1">{t("cert1")}</li>
-                    <li data-i18n="cert2">{t("cert2")}</li>
-                </ul>
+                <strong data-i18n="eduFocusTitle">{t("eduFocusTitle")}</strong>
+                <p class="muted" style="margin: 8px 0 0" data-i18n="eduFocusText">{t("eduFocusText")}</p>
             </article>
         </div>
     </div>
