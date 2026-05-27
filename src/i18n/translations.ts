@@ -69,13 +69,13 @@ export const translations = {
     proj7_role: "Full-stack: layout, components, Firebase integration, and deploy.",
     proj7_features:
       "Responsive marketing pages|Firebase for data|Optimized for production hosting",
-    proj8: "Fullstack SaaS application for managing truck fleets and logistics.",
-    proj8_preview: "Fleet & logistics workflow inspired by modern SaaS dashboards.",
+    proj8: "Public read-only MVP for managing truck fleets, routes, shipments, clients, and logistics operations.",
+    proj8_preview: "Public fleet and logistics dashboard connected to a real MVP workflow.",
     proj8_problem:
-      "Explore end-to-end product thinking: auth, data modeling, and operator-facing UI.",
-    proj8_role: "Full-stack across API, persistence, and client experience.",
+      "Turn a logistics workflow into a usable MVP where operators can review fleet, route, shipment, and client data in one place.",
+    proj8_role: "Full-stack: Spring Boot API, PostgreSQL data model, Next.js admin UI, deploy, and MVP validation.",
     proj8_features:
-      "Structured domain modules|Secure patterns|Dashboard-oriented workflows",
+      "Public read-only dashboard|Fleet, routes, shipments, clients, and documents|Spring Boot API with PostgreSQL|Next.js admin interface deployed on Vercel",
     experience: "Experience",
     expHelp: "Relevant projects and roles.",
     exp1: "Academic Java projects (CLI), small web apps and Git practice.",
@@ -187,13 +187,13 @@ export const translations = {
     proj7_role: "Full-stack: maquetación, Firebase y despliegue.",
     proj7_features:
       "Páginas responsive|Integración Firebase|Listo para hosting productivo",
-    proj8: "Aplicación SaaS Fullstack para la gestión de flotas de camiones y logística.",
-    proj8_preview: "Flujo tipo SaaS para flotas y logística con enfoque de dashboard.",
+    proj8: "MVP público de lectura para gestionar flotas, rutas, envíos, clientes y operaciones logísticas.",
+    proj8_preview: "Dashboard público de flota y logística conectado a un flujo MVP real.",
     proj8_problem:
-      "Explorar producto end-to-end: auth, modelo de datos y UI para operadores.",
-    proj8_role: "Full-stack en API, persistencia y experiencia de cliente.",
+      "Convertir un flujo logístico en un MVP usable donde operadores puedan revisar datos de flota, rutas, envíos y clientes en un solo lugar.",
+    proj8_role: "Full-stack: API con Spring Boot, modelo PostgreSQL, UI admin en Next.js, deploy y validación del MVP.",
     proj8_features:
-      "Módulos de dominio estructurados|Patrones de seguridad|Vistas tipo panel",
+      "Dashboard público de lectura|Flota, rutas, envíos, clientes y documentos|API Spring Boot con PostgreSQL|Interfaz admin en Next.js desplegada en Vercel",
     experience: "Experiencia",
     expHelp: "Proyectos y roles relevantes.",
     exp1: "Proyectos académicos en Java (CLI), apps web pequeñas y prácticas de Git.",

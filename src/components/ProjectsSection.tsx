@@ -239,7 +239,7 @@ export default function ProjectSection() {
             pill: "SaaS • Fullstack",
             image: "/images/gestion_truck.png",
             github: null,
-            web: null,
+            web: "https://gestion-truck-app.vercel.app/",
             detailsUrl: null,
             i18nPrefix: "proj8",
         },
