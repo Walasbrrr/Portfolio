@@ -1,6 +1,7 @@
 ---
 import "../styles/globals.css";
 import { translations } from "../i18n/translations";
+import GoogleAnalytics from "../components/GoogleAnalytics.astro";
 
 const siteOrigin =
     typeof import.meta.env.PUBLIC_SITE_URL === "string"
@@ -24,6 +25,7 @@ const en = translations.en;
 
 <html lang="en" class="dark">
     <head>
+        <GoogleAnalytics />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta id="meta-description" name="description" content={en.metaDescription} />

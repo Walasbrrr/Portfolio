@@ -1,0 +1,39 @@
+---
+interface Props {
+  measurementId?: string;
+}
+
+const {
+  measurementId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID ?? "G-0H0Q4Z45WE",
+} = Astro.props;
+
+const isPreview = import.meta.env.VERCEL_ENV === "preview";
+const isDev = import.meta.env.DEV;
+
+// No rastrear en entornos de vista previa (evita sesgo en métricas)
+const shouldTrack = Boolean(measurementId) && !isPreview;
+---
+
+{
+  shouldTrack && (
+    <>
+      {/* Google tag (gtag.js) */}
+      <script
+        is:inline
+        async
+        src={`https://www.googletagmanager.com/gtag/js?id=${measurementId}`}
+      />
+      <script is:inline define:vars={{ measurementId, isDev }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag("js", new Date());
+        gtag("config", measurementId, {
+          page_path: window.location.pathname,
+          ...(isDev ? { debug_mode: true } : {}),
+        });
+      </script>
+    </>
+  )
+}

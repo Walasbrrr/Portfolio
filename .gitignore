@@ -2,3 +2,8 @@ node_modules/
 debug.log
 .astro/
 dist/
+.env
+.env.production
+.env.development
+.env.local
+.env.*.local
