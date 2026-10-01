@@ -5,22 +5,43 @@ const t = (key: keyof typeof translations.en) => translations.en[key];
 <section id="experience" class="section-block">
     <div class="container">
         <div class="section-head">
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-xs font-mono text-[#56C2FF] tracking-wider uppercase">
+                    [TRACK: 03 // TRAJECTORY]
+                </span>
+            </div>
             <h2 data-i18n="experience">{t("experience")}</h2>
             <p class="muted" style="margin: 0" data-i18n="expHelp">{t("expHelp")}</p>
         </div>
-        <div class="timeline" style="display: grid; gap: 14px">
-            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 12px">
-                <div class="tl-dot" style="width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; background: linear-gradient(180deg, var(--brand), var(--brand-strong)); box-shadow: 0 0 0 4px rgba(86,194,255,0.18)"></div>
-                <div class="tl-card card" style="padding: 14px">
-                    <strong>Student Developer</strong> <span class="muted">· 2024 – 2025</span>
+        <div class="timeline" style="display: grid; gap: 16px">
+            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 14px">
+                <div class="tl-dot" style="width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: #56C2FF; box-shadow: 0 0 0 3px rgba(86,194,255,0.25)"></div>
+                <div class="tl-card card" style="padding: 16px 20px">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px">
+                        <strong style="color: #FFFFFF; font-size: 1.05rem">ComfyByte</strong>
+                        <span class="text-xs font-mono" style="color: #56C2FF">Founder & Lead Developer · 2025 – Present</span>
+                    </div>
                     <p class="muted" style="margin: 8px 0 0" data-i18n="exp1">{t("exp1")}</p>
                 </div>
             </div>
-            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 12px">
-                <div class="tl-dot" style="width: 12px; height: 12px; margin-top: 6px; border-radius: 50%; background: linear-gradient(180deg, var(--brand), var(--brand-strong)); box-shadow: 0 0 0 4px rgba(86,194,255,0.18)"></div>
-                <div class="tl-card card" style="padding: 14px">
-                    <strong>Personal Projects</strong> <span class="muted">· 2023 – 2025</span>
+            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 14px">
+                <div class="tl-dot" style="width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: #F0542B; box-shadow: 0 0 0 3px rgba(240,84,43,0.25)"></div>
+                <div class="tl-card card" style="padding: 16px 20px">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px">
+                        <strong style="color: #FFFFFF; font-size: 1.05rem">Gestion Truck Platform</strong>
+                        <span class="text-xs font-mono" style="color: #F0542B">Lead Full-Stack Architect · 2024 – Present</span>
+                    </div>
                     <p class="muted" style="margin: 8px 0 0" data-i18n="exp2">{t("exp2")}</p>
+                </div>
+            </div>
+            <div class="tl-item" style="display: grid; grid-template-columns: 24px 1fr; gap: 14px">
+                <div class="tl-dot" style="width: 10px; height: 10px; margin-top: 8px; border-radius: 50%; background: rgba(255,255,255,0.4); box-shadow: 0 0 0 3px rgba(255,255,255,0.1)"></div>
+                <div class="tl-card card" style="padding: 16px 20px">
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px">
+                        <strong style="color: #FFFFFF; font-size: 1.05rem">Year Up United & Academic Foundations</strong>
+                        <span class="text-xs font-mono" style="color: #8C99A8">Software Engineering Fellow · 2024 – Present</span>
+                    </div>
+                    <p class="muted" style="margin: 8px 0 0" data-i18n="edu1">{t("edu1")}</p>
                 </div>
             </div>
         </div>

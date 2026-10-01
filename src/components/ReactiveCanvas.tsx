@@ -89,23 +89,6 @@ export default function ReactiveCanvas() {
 
             ctx.clearRect(0, 0, width, height);
 
-            // Draw ambient cursor glow
-            if (pointer.active && pointer.x > -500 && pointer.y > -500) {
-                const glowGradient = ctx.createRadialGradient(
-                    pointer.x,
-                    pointer.y,
-                    0,
-                    pointer.x,
-                    pointer.y,
-                    RADIUS * 1.5
-                );
-                glowGradient.addColorStop(0, "rgba(86, 194, 255, 0.08)");
-                glowGradient.addColorStop(0.5, "rgba(126, 160, 255, 0.03)");
-                glowGradient.addColorStop(1, "rgba(5, 12, 22, 0)");
-                ctx.fillStyle = glowGradient;
-                ctx.fillRect(0, 0, width, height);
-            }
-
             const startX = Math.floor(0 / SPACING) * SPACING;
             const startY = Math.floor(0 / SPACING) * SPACING;
 
@@ -117,23 +100,23 @@ export default function ReactiveCanvas() {
 
                     let px = x;
                     let py = y;
-                    let dotAlpha = 0.14;
-                    let dotRadius = 1.1;
+                    let dotAlpha = 0.05;
+                    let dotRadius = 1.0;
 
                     if (pointer.active && distSq < RADIUS_SQ) {
                         const dist = Math.sqrt(distSq);
                         const factor = 1 - dist / RADIUS; // 0..1
-                        // Magnetic displacement towards or away from cursor
-                        const push = factor * 5;
+                        // Subtle displacement
+                        const push = factor * 4;
                         px -= (dx / (dist || 1)) * push;
                         py -= (dy / (dist || 1)) * push;
 
-                        dotAlpha = 0.14 + factor * 0.65;
-                        dotRadius = 1.1 + factor * 1.6;
+                        dotAlpha = 0.05 + factor * 0.28;
+                        dotRadius = 1.0 + factor * 1.2;
 
-                        ctx.fillStyle = `rgba(86, 194, 255, ${dotAlpha})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${dotAlpha})`;
                     } else {
-                        ctx.fillStyle = `rgba(154, 201, 255, ${dotAlpha})`;
+                        ctx.fillStyle = `rgba(255, 255, 255, ${dotAlpha})`;
                     }
 
                     ctx.beginPath();

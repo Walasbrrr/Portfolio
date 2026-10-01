@@ -74,26 +74,13 @@
     overflow-x: hidden;
   }
 
-  /* Figma-like backdrop */
+  /* Clean engineering carbon backdrop (No AI blur or drifting gradients) */
   .dark body {
-    background:
-      radial-gradient(circle at top left, rgba(126, 160, 255, 0.18), transparent 28%),
-      radial-gradient(circle at top right, rgba(86, 194, 255, 0.16), transparent 35%),
-      linear-gradient(180deg, var(--background) 0%, #0B1628 45%, var(--background) 100%);
+    background: #0C0E12;
   }
 
   .dark body::after {
-    content: "";
-    position: fixed;
-    inset: -20% -10%;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(86, 194, 255, 0.14), transparent 35%),
-      radial-gradient(circle at 80% 30%, rgba(126, 160, 255, 0.12), transparent 38%),
-      radial-gradient(circle at 50% 80%, rgba(86, 194, 255, 0.08), transparent 42%);
-    filter: blur(14px);
-    animation: drift 10s ease-in-out infinite alternate;
-    pointer-events: none;
-    z-index: 0;
+    display: none;
   }
 
   * {
@@ -113,41 +100,42 @@
 }
 
 .dark {
-  /* Glass-dark look (matches your Figma screenshots) */
-  --background: #050C16;
-  --foreground: #EAF2FF;
+  /* Tactile Industrial / Precision Engineering Tokens */
+  --background: #0C0E12;
+  --foreground: #F2F5F8;
 
-  /* Cards use a subtle glass gradient */
-  --card: linear-gradient(180deg, rgba(14, 30, 52, 0.82), rgba(8, 18, 32, 0.72));
-  --card-foreground: #EAF2FF;
+  /* Solid cards with crisp 1px borders */
+  --card: #13161C;
+  --card-foreground: #F2F5F8;
 
-  --popover: rgba(15, 31, 53, 0.92);
-  --popover-foreground: #EAF2FF;
+  --popover: #161922;
+  --popover-foreground: #F2F5F8;
 
   --primary: #56C2FF;
   --primary-foreground: #04101d;
-  --secondary: rgba(255, 255, 255, 0.03);
-  --secondary-foreground: #EAF2FF;
+  --secondary: #1A1E26;
+  --secondary-foreground: #E2E8F0;
 
-  --muted: rgba(255, 255, 255, 0.05);
-  --muted-foreground: #9FB2CC;
+  --muted: #1A1E26;
+  --muted-foreground: #8C99A8;
 
-  --accent: rgba(255, 255, 255, 0.05);
-  --accent-foreground: #EAF2FF;
+  --accent: #1F242E;
+  --accent-foreground: #F2F5F8;
 
-  --destructive: #d4183d;
+  --destructive: #E5484D;
   --destructive-foreground: #ffffff;
 
-  --border: rgba(154, 201, 255, 0.16);
+  --border: rgba(255, 255, 255, 0.08);
   --input: transparent;
-  --ring: rgba(86, 194, 255, 0.55);
+  --ring: rgba(86, 194, 255, 0.4);
 
-  --radius: 24px;
+  --radius: 16px;
 
-  /* Brand */
+  /* Brand & Industrial Accent */
   --brand: #56C2FF;
   --brand-strong: #7EA0FF;
-  --glow: rgba(86, 194, 255, 0.28);
+  --ember: #F0542B;
+  --glow: rgba(86, 194, 255, 0.12);
 
   /* Back-compat aliases */
   --text: var(--foreground);
@@ -730,14 +718,26 @@
   }
 
   .cta-button.primary {
-    border: none;
-    background: linear-gradient(135deg, var(--brand), var(--brand-strong));
-    color: #04101d;
-    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.9);
+    background: #FFFFFF;
+    color: #0C0E12;
+    font-weight: 600;
+  }
+
+  .cta-button.primary:hover {
+    background: #E8EEF5;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
   }
 
   .cta-button.secondary {
-    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    color: #E2E8F0;
+  }
+
+  .cta-button.secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.22);
   }
 
   .hero-side {
@@ -993,26 +993,11 @@
     border-color: rgba(255, 255, 255, 0.16);
   }
 
-  /* === Factor WOW: Gradiente Animado === */
+  /* === Titular Sólido de Alta Precisión === */
   .animated-gradient {
-    background: linear-gradient(
-      to right,
-      var(--brand),
-      var(--brand-strong),
-      #b18aff,
-      var(--brand)
-    );
-    background-size: 300% auto;
-    color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    animation: shine 4s linear infinite;
-  }
-
-  @keyframes shine {
-    to {
-      background-position: 300% center;
-    }
+    color: #FFFFFF;
+    letter-spacing: -0.02em;
+    font-weight: 700;
   }
 
   /* Responsive */
