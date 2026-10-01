@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/baseLayout.astro";
 import LangInit      from "../components/LangInit";
+import ReactiveCanvas from "../components/ReactiveCanvas";
+import CommandPalette from "../components/CommandPalette";
 import Navbar        from "../components/Navbar";
 import Hero          from "../components/Hero";
 import AboutSection      from "../components/AboutSection.astro";
@@ -12,11 +14,17 @@ import ContactSection    from "../components/ContactSection";
 ---
 
 <BaseLayout>
+  <!-- Capa 0: Atmósfera reactiva con física sutil en canvas -->
+  <ReactiveCanvas client:load />
+
   <!-- Sincroniza localStorage → store, sin renderizar nada -->
   <LangInit client:load />
 
-  <!-- Interactivos inmediatos: scroll spy, animación de tipeo -->
+  <!-- Capa 3: HUD / Telemetría y Paleta de Comandos ⌘K -->
+  <CommandPalette client:idle />
   <Navbar client:load />
+
+  <!-- Capa 1 y 2: Hero y secciones con ensamblaje -->
   <Hero   client:load />
 
   <!-- Secciones: se hidratan cuando el browser está libre -->
