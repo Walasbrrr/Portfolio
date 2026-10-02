@@ -74,6 +74,13 @@ export const translations = {
     proj4_role: "Architect: Obsidian vault schema, Linux dotfiles, containerized self-hosting, and scripts.",
     proj4_features:
       "Canonical knowledge vault|Linux/Arch/Debian homelab|Containerized micro-services & dotfiles",
+    proj5: "Official commercial web platform and interactive event booking system for Mister Fiestas.",
+    proj5_preview: "Commercial web platform with an automated event quotation flow and direct WhatsApp API dispatch.",
+    proj5_problem:
+      "Streamline event package selections, date bookings, and customer inquiries into an automated, zero-friction mobile workflow.",
+    proj5_role: "Full-Stack Developer: Next.js App Router architecture, service catalog, interactive date picker, and WhatsApp API payload serializer.",
+    proj5_features:
+      "Interactive event quotation|WhatsApp automated dispatch|Service catalog & date picker|Next.js App Router & Vercel deployment",
     proj7: "Dominican financial platform featuring modular payment calendar and strict security foundations.",
     proj7_preview: "Fintech web platform with clear installment calendars and customer communication.",
     proj7_problem:
@@ -205,6 +212,13 @@ export const translations = {
     proj4_role: "Arquitecto: esquema del vault de Obsidian, dotfiles de Linux, servicios autocontenidos y scripts.",
     proj4_features:
       "Bóveda de conocimiento canónica|Homelab en Linux/Arch/Debian|Microservicios en contenedores y dotfiles",
+    proj5: "Plataforma web comercial y sistema interactivo de cotización de eventos para Mister Fiestas.",
+    proj5_preview: "Plataforma web con flujo automatizado de cotización de eventos y despacho directo vía WhatsApp API.",
+    proj5_problem:
+      "Agilizar la selección de paquetes para fiestas, reserva de fechas y consultas de clientes en un flujo móvil sin fricción.",
+    proj5_role: "Desarrollador Full-Stack: arquitectura en Next.js App Router, catálogo de servicios, selector de fechas y serialización para WhatsApp.",
+    proj5_features:
+      "Cotizador interactivo de eventos|Despacho automatizado a WhatsApp|Catálogo de servicios y fechas|Next.js App Router y despliegue en Vercel",
     proj7: "Plataforma financiera dominicana con calendario modular de pagos y estrictos estándares de seguridad.",
     proj7_preview: "Plataforma web fintech con cronograma claro de cuotas y comunicación con clientes.",
     proj7_problem:

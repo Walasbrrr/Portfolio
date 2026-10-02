@@ -49,18 +49,21 @@ Trabajo implementado y commiteado en el commit `bdc71dd`:
 
 ---
 
-## 4. Los 4 Proyectos Canónicos del Portfolio
+## 4. Los 5 Proyectos Canónicos del Portfolio
 
-1. **Gestion Truck Platform**
+1. **Gestion Truck Platform** *(Iniciado a finales de 2025 – Presente)*
    * *Stack:* Java, Spring Boot, PostgreSQL, React, TypeScript, Docker.
    * *Enfoque:* SaaS de flotas y logística, APIs REST, transacciones ACID y telemetría de conductores.
-2. **ComfyByte Studio**
+2. **ComfyByte Studio** *(Iniciado en 2026 – Presente)*
    * *Stack:* Next.js, TypeScript, Tailwind CSS, Design Tokens, Editorial UI.
    * *Enfoque:* Estudio de software independiente, dirección de arte, tokens y web de alto rendimiento.
-3. **V&C Soluciones Financieras**
+3. **Mister Fiestas** *(2026)*
+   * *Stack:* Next.js App Router, React, TypeScript, Tailwind CSS, WhatsApp API, Vercel.
+   * *Enfoque:* Plataforma web comercial con cotizador interactivo de eventos, catálogo de servicios y despacho a WhatsApp.
+4. **V&C Soluciones Financieras**
    * *Stack:* React, TypeScript, Tailwind CSS, Módulos Financieros, Seguridad.
    * *Enfoque:* Plataforma fintech dominicana, calendario modular de cuotas y bases de privacidad/seguridad.
-4. **WalenOS & Systems Homelab**
+5. **WalenOS & Systems Homelab**
    * *Stack:* Linux (Arch/Debian), Obsidian, Docker, Shell Scripting, Self-Hosting.
    * *Enfoque:* Sistema operativo de conocimiento, servidores homelab, automatización y dotfiles.
 

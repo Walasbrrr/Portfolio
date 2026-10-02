@@ -11,7 +11,7 @@ import {
 } from "lucide-react";
 
 /** Keys that match src/i18n/translations.ts (projN + _preview, _problem, _role, _features). */
-type ProjI18nPrefix = "proj1" | "proj4" | "proj7" | "proj8";
+type ProjI18nPrefix = "proj1" | "proj4" | "proj5" | "proj7" | "proj8";
 
 interface ArchitectureSpecs {
     pattern: string;
@@ -384,6 +384,24 @@ export default function ProjectSection() {
                 persistence: "Static-site generation with localized token specimens and automated build pipelines.",
                 infrastructure: "Edge CDN hosting with instant cache revalidation; zero-runtime layout shift.",
                 highlights: ["Tokens system", "Variable typography", "Custom scroll choreography", "High FPS"],
+            },
+        },
+        {
+            id: 5,
+            title: "Mister Fiestas",
+            tags: ["web", "production"],
+            stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "WhatsApp API", "Vercel"],
+            pill: "Commercial Platform",
+            image: "/images/mister_fiestas.jpeg",
+            github: "https://github.com/Walasbrrr/MisterFiestas-Web",
+            web: "https://misterfiestas.com",
+            detailsUrl: null,
+            i18nPrefix: "proj5",
+            specs: {
+                pattern: "Interactive event quotation funnel with dynamic package calculator and WhatsApp API serializer.",
+                persistence: "Client-side state orchestration with typed service catalog, date reservation checks, and validation.",
+                infrastructure: "Next.js App Router deployed on Vercel with responsive mobile-first architecture and deep-linking.",
+                highlights: ["Interactive quotation engine", "WhatsApp API payload serializer", "Service catalog", "Mobile-first booking UX"],
             },
         },
         {
