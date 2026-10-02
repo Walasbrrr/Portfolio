@@ -112,8 +112,10 @@ export default function Hero() {
         <section id="home" className="home">
             <div className="container hero-layout hero-figma">
                 <div className="hero-copy card hero-panel">
-                    <div className="hero-badge">
-                        <i className="fas fa-sparkles" aria-hidden="true"></i>
+                    <div className="hero-badge flex items-center gap-2">
+                        <span className="rounded bg-[#56C2FF]/15 px-1.5 py-0.5 text-[10px] font-mono font-medium text-[#56C2FF]">
+                            [SYS:00]
+                        </span>
                         <span>{t("heroBadge")}</span>
                     </div>
 
@@ -215,11 +217,12 @@ export default function Hero() {
                     <div className="stat-hero stat-hero-wide">
                         <div className="stat-hero-label">{t("heroSpecialtiesLabel")}</div>
                         <div className="hero-chips">
-                            <span className="chip">Java</span>
-                            <span className="chip">Spring Boot</span>
-                            <span className="chip">React</span>
+                            <span className="chip">Java & Spring</span>
                             <span className="chip">PostgreSQL</span>
-                            <span className="chip">Docker</span>
+                            <span className="chip">React & Next.js</span>
+                            <span className="chip">Linux & Docker</span>
+                            <span className="chip">TypeScript</span>
+                            <span className="chip">System Design</span>
                         </div>
                     </div>
                 </aside>

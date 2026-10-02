@@ -6,11 +6,30 @@ const CV_MAILTO =
     "mailto:walenculd@gmail.com?subject=CV%20request%20%E2%80%94%20portfolio&body=Hi%20Walen%2C%0A%0A";
 
 export default function Navbar() {
-    const { t } = useLanguage();
+    const { t, lang } = useLanguage();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const closeMenu = () => setIsMenuOpen(false);
     const [activeSection, setActiveSection] = useState("home");
+    const [timeString, setTimeString] = useState("");
     const navRef = useRef<HTMLDivElement>(null);
+
+    // Live clock for New Jersey (America/New_York)
+    useEffect(() => {
+        const updateTime = () => {
+            const now = new Date();
+            const formatted = now.toLocaleTimeString("en-US", {
+                timeZone: "America/New_York",
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit",
+                hour12: true,
+            });
+            setTimeString(formatted);
+        };
+        updateTime();
+        const interval = setInterval(updateTime, 1000);
+        return () => clearInterval(interval);
+    }, []);
 
     useEffect(() => {
         if (!isMenuOpen) return;
@@ -59,8 +78,51 @@ export default function Navbar() {
         };
     }, []);
 
+    const triggerCommandPalette = () => {
+        window.dispatchEvent(
+            new KeyboardEvent("keydown", { key: "k", metaKey: true, bubbles: true })
+        );
+    };
+
     return (
         <nav>
+            {/* Top Micro-HUD / Telemetry Bar */}
+            <div className="w-full border-b border-[rgba(154,201,255,0.08)] bg-[#050C16]/85 px-4 py-1.5 backdrop-blur-md">
+                <div className="container mx-auto flex items-center justify-between text-[11px] font-mono text-[#9FB2CC]/80">
+                    <div className="flex items-center gap-3">
+                        <span className="flex items-center gap-1.5">
+                            <span className="relative flex h-2 w-2">
+                                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+                                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500"></span>
+                            </span>
+                            <span className="text-white/90 font-medium">
+                                {lang === "es" ? "Disponible para Roles" : "Available for Roles"}
+                            </span>
+                        </span>
+                        <span className="hidden sm:inline text-white/30">•</span>
+                        <span className="hidden sm:inline text-[#9FB2CC]/70">
+                            {lang === "es" ? "Ingeniería de Software & Sistemas" : "Software & Systems Engineering"}
+                        </span>
+                    </div>
+
+                    <div className="flex items-center gap-4">
+                        {timeString && (
+                            <span className="hidden md:inline tabular-nums text-white/80">
+                                NJ, US • {timeString}
+                            </span>
+                        )}
+                        <button
+                            type="button"
+                            onClick={triggerCommandPalette}
+                            className="hidden sm:flex items-center gap-1.5 rounded border border-white/10 bg-white/5 px-2 py-0.5 text-[10px] text-white/70 hover:border-[#56C2FF]/40 hover:text-white transition"
+                        >
+                            <span>Search</span>
+                            <kbd className="rounded bg-white/10 px-1 text-[9px]">⌘K</kbd>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
             <div className="nav-shell" ref={navRef}>
                 <a className="brand-text" href="#home" onClick={closeMenu}>
                     <span
